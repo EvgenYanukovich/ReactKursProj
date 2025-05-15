@@ -1,8 +1,8 @@
-import React, { useState, useContext, useEffect } from 'react';
+import { FC, useState, useContext, useEffect, ChangeEvent, FormEvent } from 'react';
 import { AuthContext } from '../utils/AuthContext';
 import { Link } from 'react-router-dom';
 
-const ProfilePage: React.FC = () => {
+const ProfilePage: FC = () => {
     const { currentUser, logout } = useContext(AuthContext);
     const [formData, setFormData] = useState({
         name: '',
@@ -31,7 +31,7 @@ const ProfilePage: React.FC = () => {
         }
     }, [currentUser]);
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         setFormData(prev => ({
             ...prev,
@@ -39,7 +39,7 @@ const ProfilePage: React.FC = () => {
         }));
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
         
         // Здесь будет логика сохранения данных пользователя

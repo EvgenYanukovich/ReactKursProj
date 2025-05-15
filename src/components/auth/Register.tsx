@@ -1,8 +1,8 @@
-import React, { useState, useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { AuthContext } from '../../utils/AuthContext';
+import { FC, useState, useContext, ChangeEvent, FormEvent } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../utils/AuthContext";
 
-const Register: React.FC = () => {
+const Register: FC = () => {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -17,7 +17,7 @@ const Register: React.FC = () => {
     const { register } = useContext(AuthContext);
     const navigate = useNavigate();
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         setFormData(prev => ({
             ...prev,
@@ -25,7 +25,7 @@ const Register: React.FC = () => {
         }));
     };
 
-    const handleSubmit = async (e: React.FormEvent) => {
+    const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
         
         // Проверка обязательных полей

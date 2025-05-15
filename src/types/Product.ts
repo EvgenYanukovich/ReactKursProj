@@ -13,5 +13,5 @@ export interface Product {
     description: string;
     features: string[];
     imageUrl: string;
-    thumbnailUrl: string;
+    thumbnailUrl?: string | null;
 }

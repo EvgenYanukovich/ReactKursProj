@@ -10,6 +10,12 @@ import HomePage from "./pages/HomePage";
 import CatalogPage from "./pages/CatalogPage";
 import ContactsPage from "./pages/ContactsPage";
 import ProfilePage from "./pages/ProfilePage";
+import CartPage from "./pages/CartPage";
+import CheckoutPage from "./pages/CheckoutPage";
+import OrderSuccessPage from "./pages/OrderSuccessPage";
+import OrdersPage from "./pages/OrdersPage";
+import FavoritesPage from "./pages/FavoritesPage";
+import ProductPage from "./pages/ProductPage";
 
 // Импорт компонентов авторизации
 import Login from "./components/auth/Login";
@@ -18,6 +24,7 @@ import Register from "./components/auth/Register";
 // Импорт контекстов
 import { AuthProvider, AuthContext } from "./utils/AuthContext";
 import { CartProvider } from "./utils/CartContext";
+import { FavoritesProvider } from "./utils/FavoritesContext";
 import { useContext } from "react";
 
 // Компонент защищенного маршрута
@@ -35,7 +42,8 @@ function App() {
 	return (
 		<AuthProvider>
 			<CartProvider>
-				<Router>
+				<FavoritesProvider>
+					<Router>
 					<Routes>
 						{/* Страницы авторизации */}
 						<Route path="/login" element={<Login />} />
@@ -45,7 +53,18 @@ function App() {
 						<Route path="/" element={<Layout />}>
 							<Route index element={<HomePage />} />
 							<Route path="catalog" element={<CatalogPage />} />
+							<Route path="product/:id" element={<ProductPage />} />
 							<Route path="contacts" element={<ContactsPage />} />
+							<Route path="cart" element={<CartPage />} />
+							<Route
+								path="checkout"
+								element={
+									<ProtectedRoute>
+										<CheckoutPage />
+									</ProtectedRoute>
+								}
+							/>
+							<Route path="order-success/:orderId" element={<OrderSuccessPage />} />
 
 							{/* Защищенные маршруты */}
 							<Route
@@ -61,25 +80,21 @@ function App() {
 								path="orders"
 								element={
 									<ProtectedRoute>
-										<div className="container mx-auto px-4 py-8">
-											<h1 className="text-3xl font-bold mb-8">Мои заказы</h1>
-											<p>Здесь будет размещена информация о ваших заказах</p>
-										</div>
+										<OrdersPage />
 									</ProtectedRoute>
 								}
 							/>
-
+							
 							<Route
 								path="favorites"
 								element={
 									<ProtectedRoute>
-										<div className="container mx-auto px-4 py-8">
-											<h1 className="text-3xl font-bold mb-8">Избранное</h1>
-											<p>Здесь будут размещены ваши избранные товары</p>
-										</div>
+										<FavoritesPage />
 									</ProtectedRoute>
 								}
 							/>
+
+
 
 							{/* Страница заглушка для остальных разделов */}
 							<Route
@@ -95,7 +110,8 @@ function App() {
 							/>
 						</Route>
 					</Routes>
-				</Router>
+					</Router>
+				</FavoritesProvider>
 			</CartProvider>
 		</AuthProvider>
 	);

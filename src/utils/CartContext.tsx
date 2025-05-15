@@ -1,11 +1,9 @@
-import React, { createContext, useState, useContext } from "react";
-import type { Product } from "../types/Product";
-import type { ReactNode } from "react";
+import { ReactNode, createContext, useState, useContext, FC, useEffect } from "react";
+import { Product } from "../types/Product";
+import { CartItem, saveCart, getUserCart, clearUserCart } from "./localStorage";
+import { AuthContext } from "./AuthContext";
 
-interface CartItem {
-	product: Product;
-	quantity: number;
-}
+// Используем тип CartItem из localStorage.ts
 
 interface CartContextType {
 	cartItems: CartItem[];
@@ -33,8 +31,62 @@ interface CartProviderProps {
 	children: ReactNode;
 }
 
-export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
+export const CartProvider: FC<CartProviderProps> = ({ children }) => {
+	const { currentUser } = useContext(AuthContext);
 	const [cartItems, setCartItems] = useState<CartItem[]>([]);
+	const GUEST_CART_KEY = 'petsclaws_guest_cart';
+	
+	// Загружаем корзину при инициализации и при входе/выходе пользователя
+	useEffect(() => {
+		if (currentUser) {
+			// Если пользователь авторизован, загружаем его корзину
+			const userCart = getUserCart(currentUser.id);
+			
+			// Если в корзине пользователя ничего нет, но есть гостевая корзина, переносим товары
+			if (userCart.length === 0) {
+				const guestCartJson = localStorage.getItem(GUEST_CART_KEY);
+				if (guestCartJson) {
+					const guestCart = JSON.parse(guestCartJson);
+					if (guestCart.length > 0) {
+						saveCart(currentUser.id, guestCart);
+						setCartItems(guestCart);
+						// Очищаем гостевую корзину
+						localStorage.removeItem(GUEST_CART_KEY);
+						return;
+					}
+				}
+			}
+			setCartItems(userCart);
+		} else {
+			// Если пользователь не авторизован, загружаем гостевую корзину
+			const guestCartJson = localStorage.getItem(GUEST_CART_KEY);
+			if (guestCartJson) {
+				setCartItems(JSON.parse(guestCartJson));
+			} else {
+				setCartItems([]);
+			}
+		}
+	}, [currentUser]);
+	
+	// Сохраняем корзину при изменении
+	useEffect(() => {
+		if (cartItems.length > 0) {
+			if (currentUser) {
+				// Если пользователь авторизован, сохраняем в его корзину
+				saveCart(currentUser.id, cartItems);
+			} else {
+				// Если пользователь не авторизован, сохраняем в гостевую корзину
+				localStorage.setItem(GUEST_CART_KEY, JSON.stringify(cartItems));
+			}
+		} else if (cartItems.length === 0) {
+			// Если корзина пуста, удаляем соответствующие данные
+			if (currentUser) {
+				clearUserCart(currentUser.id);
+			} else {
+				localStorage.removeItem(GUEST_CART_KEY);
+			}
+		}
+	}, [cartItems, currentUser]);
 
 	// Рассчитываем общее количество товаров
 	const totalItems = cartItems.reduce((total, item) => total + item.quantity, 0);
@@ -87,6 +139,11 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
 	// Очистить корзину
 	const clearCart = () => {
 		setCartItems([]);
+		if (currentUser) {
+			clearUserCart(currentUser.id);
+		} else {
+			localStorage.removeItem(GUEST_CART_KEY);
+		}
 	};
 
 	return (

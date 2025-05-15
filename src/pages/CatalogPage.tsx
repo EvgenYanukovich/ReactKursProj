@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import { FC, useState, useEffect } from "react";
 import ProductCard from "../components/catalog/ProductCard";
 import type { Product } from "../types/Product";
 import productData from "../data/products.json";
 
-const CatalogPage: React.FC = () => {
+const CatalogPage: FC = () => {
 	const [priceRange, setPriceRange] = useState<[number, number]>([0, 5000]);
 	const [products, setProducts] = useState<Product[]>([]);
 	const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
@@ -96,9 +96,7 @@ const CatalogPage: React.FC = () => {
 		switch (sortType) {
 			case "popular":
 				// Сортировка по рейтингу и количеству отзывов
-				sortedProducts.sort((a, b) => 
-					(b.rating * b.reviewCount) - (a.rating * a.reviewCount)
-				);
+				sortedProducts.sort((a, b) => b.rating * b.reviewCount - a.rating * a.reviewCount);
 				break;
 			case "price_asc":
 				// Сортировка по возрастанию цены
@@ -262,7 +260,10 @@ const CatalogPage: React.FC = () => {
 								max={priceRange[1]}
 								value={filters.maxPrice}
 								onChange={(e) =>
-									handleFilterChange("priceRange", [filters.minPrice, parseInt(e.target.value)])
+									handleFilterChange("priceRange", [
+										filters.minPrice,
+										parseInt(e.target.value),
+									])
 								}
 								className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer mt-4"
 							/>
@@ -306,14 +307,6 @@ const CatalogPage: React.FC = () => {
 							</label>
 						</div>
 					</div>
-
-					{/* Кнопки применения фильтров */}
-					<div className="space-y-2">
-						<button className="btn-primary w-full">Применить</button>
-						<button className="w-full py-2 px-4 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50">
-							Сбросить фильтры
-						</button>
-					</div>
 				</div>
 
 				{/* Список товаров */}
@@ -327,13 +320,15 @@ const CatalogPage: React.FC = () => {
 
 						<div className="flex items-center">
 							<span className="mr-2 text-gray-700">Сортировка:</span>
-							<select 
+							<select
 								className="p-2 border border-gray-300 rounded-md"
 								value={sortType}
 								onChange={(e) => {
 									setSortType(e.target.value);
 									// Перезапускаем фильтрацию с новым типом сортировки
-									setFilteredProducts(sortProducts(filteredProducts, e.target.value));
+									setFilteredProducts(
+										sortProducts(filteredProducts, e.target.value)
+									);
 								}}
 							>
 								<option value="popular">По популярности</option>
