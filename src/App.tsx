@@ -19,6 +19,7 @@ import ProductPage from "./pages/ProductPage";
 import SalesPage from "./pages/SalesPage";
 import BlogPage from "./pages/BlogPage";
 import BlogPostPage from "./pages/BlogPostPage";
+import NotFoundPage from "./pages/NotFoundPage";
 
 // Импорт компонентов авторизации
 import Login from "./components/auth/Login";
@@ -104,18 +105,8 @@ function App() {
 
 
 
-							{/* Страница заглушка для остальных разделов */}
-							<Route
-								path="*"
-								element={
-									<div className="container mx-auto px-4 py-8 text-center">
-										<h1 className="text-3xl font-bold mb-8">
-											Страница в разработке
-										</h1>
-										<p>Данный раздел находится в процессе разработки</p>
-									</div>
-								}
-							/>
+							{/* Страница 404 для несуществующих маршрутов */}
+							<Route path="*" element={<NotFoundPage />} />
 						</Route>
 					</Routes>
 					</Router>

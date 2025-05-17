@@ -55,10 +55,13 @@ const HomePage: FC = () => {
 	}, []);
 	return (
 		<div>
-			<section className="py-12" style={{ backgroundColor: 'var(--section-bg)' }}>
+			<section className="py-12" style={{ backgroundColor: "var(--section-bg)" }}>
 				<div className="container mx-auto px-4">
 					<div className="relative overflow-hidden rounded-lg shadow-lg">
-						<div className="rounded-lg overflow-hidden" style={{ backgroundColor: 'var(--card-bg)' }}>
+						<div
+							className="rounded-lg overflow-hidden"
+							style={{ backgroundColor: "var(--card-bg)" }}
+						>
 							<div className="relative">
 								<img
 									src={"/images/Hero.png"}
@@ -97,7 +100,7 @@ const HomePage: FC = () => {
 						<Link
 							to="/catalog?petType=Собаки"
 							className="rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
-							style={{ backgroundColor: 'var(--card-bg)' }}
+							style={{ backgroundColor: "var(--card-bg)" }}
 						>
 							<div className="p-4 text-center">
 								<div className="w-16 h-16 mx-auto mb-4 bg-orange-100 rounded-full flex items-center justify-center">
@@ -110,7 +113,7 @@ const HomePage: FC = () => {
 						<Link
 							to="/catalog?petType=Кошки"
 							className="rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
-							style={{ backgroundColor: 'var(--card-bg)' }}
+							style={{ backgroundColor: "var(--card-bg)" }}
 						>
 							<div className="p-4 text-center">
 								<div className="w-16 h-16 mx-auto mb-4 bg-orange-100 rounded-full flex items-center justify-center">
@@ -123,7 +126,7 @@ const HomePage: FC = () => {
 						<Link
 							to="/catalog?petType=Грызуны"
 							className="rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
-							style={{ backgroundColor: 'var(--card-bg)' }}
+							style={{ backgroundColor: "var(--card-bg)" }}
 						>
 							<div className="p-4 text-center">
 								<div className="w-16 h-16 mx-auto mb-4 bg-orange-100 rounded-full flex items-center justify-center">
@@ -136,7 +139,7 @@ const HomePage: FC = () => {
 						<Link
 							to="/catalog?petType=Птицы"
 							className="rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
-							style={{ backgroundColor: 'var(--card-bg)' }}
+							style={{ backgroundColor: "var(--card-bg)" }}
 						>
 							<div className="p-4 text-center">
 								<div className="w-16 h-16 mx-auto mb-4 bg-orange-100 rounded-full flex items-center justify-center">
@@ -150,14 +153,17 @@ const HomePage: FC = () => {
 			</section>
 
 			{/* Популярные товары */}
-			<section className="py-12" style={{ backgroundColor: 'var(--section-bg)' }}>
+			<section className="py-12" style={{ backgroundColor: "var(--section-bg)" }}>
 				<div className="container mx-auto px-4">
 					<h2 className="text-2xl font-bold mb-8 text-center">Популярные товары</h2>
 
 					<div className="relative">
 						<button
 							className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 p-2 rounded-full shadow-md"
-							style={{ backgroundColor: 'var(--card-bg)', color: 'var(--text-color)' }}
+							style={{
+								backgroundColor: "var(--card-bg)",
+								color: "var(--text-color)",
+							}}
 							onClick={() => sliderRef.current?.slickPrev()}
 						>
 							<svg
@@ -190,7 +196,10 @@ const HomePage: FC = () => {
 
 						<button
 							className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 p-2 rounded-full shadow-md"
-							style={{ backgroundColor: 'var(--card-bg)', color: 'var(--text-color)' }}
+							style={{
+								backgroundColor: "var(--card-bg)",
+								color: "var(--text-color)",
+							}}
 							onClick={() => sliderRef.current?.slickNext()}
 						>
 							<svg
@@ -213,7 +222,10 @@ const HomePage: FC = () => {
 			</section>
 
 			{/* Подписка на рассылку */}
-			<section className="py-12 text-white" style={{ backgroundColor: 'var(--primary-color)' }}>
+			<section
+				className="py-12 text-white"
+				style={{ backgroundColor: "var(--primary-color)" }}
+			>
 				<div className="container mx-auto px-4">
 					<div className="text-center max-w-2xl mx-auto">
 						<h2 className="text-2xl font-bold mb-4">Подпишитесь на наши акции</h2>
@@ -225,7 +237,7 @@ const HomePage: FC = () => {
 							<input
 								type="email"
 								placeholder="Ваш email"
-								className="flex-grow py-2 px-4 rounded-md focus:outline-none text-gray-800 border border-gray-800"
+								className="flex-grow py-2 px-4 rounded-md focus:outline-none text-white border border-white"
 							/>
 							<button
 								type="submit"

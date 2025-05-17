@@ -20,11 +20,15 @@ const pathNameMap: Record<string, string> = {
 	"/favorites": "Избранное",
 	"/cart": "Корзина",
 	"/product": "Товар",
+	"/404": "Страница не найдена",
 };
 
 const Breadcrumbs: FC = () => {
 	const location = useLocation();
 	const pathnames = location.pathname.split("/").filter((x) => x);
+	
+	// Проверяем, находимся ли мы на странице 404
+	const is404Page = location.pathname === "/404" || location.pathname.includes("/404");
 
 	// Состояние для хранения названия товара, если находимся на странице товара
 	const [productName, setProductName] = useState<string>("");
@@ -77,6 +81,41 @@ const Breadcrumbs: FC = () => {
 	// Если мы на главной странице, не показываем хлебные крошки
 	if (location.pathname === "/") {
 		return null;
+	}
+	
+	// Для страницы 404 показываем специальные хлебные крошки
+	if (is404Page) {
+		return (
+			<nav className="bg-[var(--bg-secondary)]">
+				<div className="container py-3 px-4 mx-auto">
+					<ol className="flex flex-wrap items-center text-sm text-[var(--text-secondary)]">
+						<li className="flex items-center">
+							<Link to="/" className="hover:text-[var(--accent-color)] font-medium">
+								Главная
+							</Link>
+						</li>
+						<li className="flex items-center">
+							<svg
+								className="mx-2 text-[var(--text-secondary)]"
+								width="16"
+								height="16"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								strokeWidth="2"
+								strokeLinecap="round"
+								strokeLinejoin="round"
+							>
+								<polyline points="9 18 15 12 9 6"></polyline>
+							</svg>
+							<span className="font-medium text-[var(--text-primary)]">
+								Страница не найдена
+							</span>
+						</li>
+					</ol>
+				</div>
+			</nav>
+		);
 	}
 
 	return (

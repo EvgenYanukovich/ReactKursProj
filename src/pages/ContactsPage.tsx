@@ -72,8 +72,12 @@ const ContactsPage: FC = () => {
 									</svg>
 								</div>
 								<div>
-									<h3 className="font-medium text-[var(--text-primary)]">Адрес</h3>
-									<p className="text-[var(--text-secondary)]">ул. Пушкина 123, Москва, Россия</p>
+									<h3 className="font-medium text-[var(--text-primary)]">
+										Адрес
+									</h3>
+									<p className="text-[var(--text-secondary)]">
+										ул. Пушкина 123, Москва, Россия
+									</p>
 								</div>
 							</div>
 
@@ -94,8 +98,12 @@ const ContactsPage: FC = () => {
 									</svg>
 								</div>
 								<div>
-									<h3 className="font-medium text-[var(--text-primary)]">Телефон</h3>
-									<p className="text-[var(--text-secondary)]">+7 (999) 123-45-67</p>
+									<h3 className="font-medium text-[var(--text-primary)]">
+										Телефон
+									</h3>
+									<p className="text-[var(--text-secondary)]">
+										+7 (999) 123-45-67
+									</p>
 								</div>
 							</div>
 
@@ -116,8 +124,12 @@ const ContactsPage: FC = () => {
 									</svg>
 								</div>
 								<div>
-									<h3 className="font-medium text-[var(--text-primary)]">Email</h3>
-									<p className="text-[var(--text-secondary)]">info@petsandclaws.ru</p>
+									<h3 className="font-medium text-[var(--text-primary)]">
+										Email
+									</h3>
+									<p className="text-[var(--text-secondary)]">
+										info@pawsandclaws.ru
+									</p>
 								</div>
 							</div>
 
@@ -138,9 +150,15 @@ const ContactsPage: FC = () => {
 									</svg>
 								</div>
 								<div>
-									<h3 className="font-medium text-[var(--text-primary)]">Время работы</h3>
-									<p className="text-[var(--text-secondary)]">Пн-Пт: 9:00 - 21:00</p>
-									<p className="text-[var(--text-secondary)]">Сб-Вс: 10:00 - 18:00</p>
+									<h3 className="font-medium text-[var(--text-primary)]">
+										Время работы
+									</h3>
+									<p className="text-[var(--text-secondary)]">
+										Пн-Пт: 9:00 - 21:00
+									</p>
+									<p className="text-[var(--text-secondary)]">
+										Сб-Вс: 10:00 - 18:00
+									</p>
 								</div>
 							</div>
 						</div>
@@ -195,7 +213,9 @@ const ContactsPage: FC = () => {
 
 						<div className="space-y-4">
 							<div>
-								<h3 className="font-medium text-[var(--text-primary)]">Как оформить заказ?</h3>
+								<h3 className="font-medium text-[var(--text-primary)]">
+									Как оформить заказ?
+								</h3>
 								<p className="text-[var(--text-secondary)]">
 									Добавьте товары в корзину, перейдите к оформлению и следуйте
 									инструкциям.
@@ -213,7 +233,9 @@ const ContactsPage: FC = () => {
 							</div>
 
 							<div>
-								<h3 className="font-medium text-[var(--text-primary)]">Сроки доставки?</h3>
+								<h3 className="font-medium text-[var(--text-primary)]">
+									Сроки доставки?
+								</h3>
 								<p className="text-[var(--text-secondary)]">
 									Доставка по Москве осуществляется в течение 1-2 дней, по России
 									3-7 дней.

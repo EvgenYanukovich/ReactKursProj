@@ -34,14 +34,14 @@ interface CartProviderProps {
 export const CartProvider: FC<CartProviderProps> = ({ children }) => {
 	const { currentUser } = useContext(AuthContext);
 	const [cartItems, setCartItems] = useState<CartItem[]>([]);
-	const GUEST_CART_KEY = 'petsclaws_guest_cart';
-	
+	const GUEST_CART_KEY = "pawsclaws_guest_cart";
+
 	// Загружаем корзину при инициализации и при входе/выходе пользователя
 	useEffect(() => {
 		if (currentUser) {
 			// Если пользователь авторизован, загружаем его корзину
 			const userCart = getUserCart(currentUser.id);
-			
+
 			// Если в корзине пользователя ничего нет, но есть гостевая корзина, переносим товары
 			if (userCart.length === 0) {
 				const guestCartJson = localStorage.getItem(GUEST_CART_KEY);
@@ -67,7 +67,7 @@ export const CartProvider: FC<CartProviderProps> = ({ children }) => {
 			}
 		}
 	}, [currentUser]);
-	
+
 	// Сохраняем корзину при изменении
 	useEffect(() => {
 		if (cartItems.length > 0) {

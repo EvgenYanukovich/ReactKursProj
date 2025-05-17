@@ -401,23 +401,6 @@ const CheckoutPage: FC = () => {
 									<span className="text-sm text-[var(--text-secondary)]">
 										Visa, MasterCard, Мир
 									</span>
-									<div className="flex mt-1 space-x-2">
-										<img
-											src="/images/payment/visa.svg"
-											alt="Visa"
-											className="h-6"
-										/>
-										<img
-											src="/images/payment/mastercard.svg"
-											alt="MasterCard"
-											className="h-6"
-										/>
-										<img
-											src="/images/payment/mir.svg"
-											alt="Мир"
-											className="h-6"
-										/>
-									</div>
 								</div>
 							</label>
 

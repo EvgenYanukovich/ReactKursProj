@@ -2,11 +2,11 @@ import { User } from './types';
 import { Product } from '../types/Product';
 
 // Ключи для localStorage
-const USERS_KEY = 'petsclaws_users';
-const CURRENT_USER_KEY = 'petsclaws_current_user';
-const CART_KEY = 'petsclaws_cart';
-const ORDERS_KEY = 'petsclaws_orders';
-const FAVORITES_KEY = 'petsclaws_favorites';
+const USERS_KEY = 'pawsclaws_users';
+const CURRENT_USER_KEY = 'pawsclaws_current_user';
+const CART_KEY = 'pawsclaws_cart';
+const ORDERS_KEY = 'pawsclaws_orders';
+const FAVORITES_KEY = 'pawsclaws_favorites';
 
 // Получение списка пользователей
 export const getUsers = (): User[] => {
@@ -53,7 +53,7 @@ export const getCurrentUser = (): User | null => {
 export const getUserData = (): { id: string; name: string; email: string } | null => {
     const currentUser = getCurrentUser();
     if (!currentUser) return null;
-    
+
     return {
         id: currentUser.id,
         name: currentUser.name,
@@ -129,13 +129,13 @@ export const saveOrder = (order: Omit<Order, 'id'>): Order => {
         ...order,
         id: crypto.randomUUID(),
     };
-    
+
     orders.push(newOrder);
     localStorage.setItem(ORDERS_KEY, JSON.stringify(orders));
-    
+
     // Очищаем корзину пользователя после оформления заказа
     clearUserCart(order.userId);
-    
+
     return newOrder;
 };
 
@@ -175,7 +175,7 @@ export const getFavoritesData = (): Record<string, Product[]> => {
 export const addToFavorites = (userId: string, product: Product): void => {
     const favoritesData = getFavoritesData();
     const userFavorites = favoritesData[userId] || [];
-    
+
     // Проверяем, есть ли уже этот товар в избранном
     if (!userFavorites.some(item => item.id === product.id)) {
         userFavorites.push(product);
@@ -188,7 +188,7 @@ export const addToFavorites = (userId: string, product: Product): void => {
 export const removeFromFavorites = (userId: string, productId: number): void => {
     const favoritesData = getFavoritesData();
     const userFavorites = favoritesData[userId] || [];
-    
+
     const updatedFavorites = userFavorites.filter(product => product.id !== productId);
     favoritesData[userId] = updatedFavorites;
     localStorage.setItem(FAVORITES_KEY, JSON.stringify(favoritesData));
