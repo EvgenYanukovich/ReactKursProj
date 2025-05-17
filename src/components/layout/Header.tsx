@@ -2,6 +2,8 @@ import { FC, useContext, useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../utils/AuthContext";
 import { useCart } from "../../utils/CartContext";
+import SearchBar from "../common/SearchBar";
+import ThemeToggle from "../common/ThemeToggle";
 
 const Header: FC = () => {
 	const { currentUser, isAuthenticated, logout } = useContext(AuthContext);
@@ -39,12 +41,12 @@ const Header: FC = () => {
 	}, []);
 
 	return (
-		<header className="bg-white shadow-md">
+		<header className="bg-[var(--bg-body)] shadow-md">
 			<div className="container mx-auto px-4 py-4">
 				<div className="flex justify-between items-center">
 					{/* Логотип */}
 					<Link to="/" className="flex items-center">
-						<div className="text-orange-500 text-2xl font-bold flex items-center">
+						<div className="text-[var(--text-secondary)] text-2xl font-bold flex items-center">
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
 								className="h-8 w-8 mr-2"
@@ -59,60 +61,48 @@ const Header: FC = () => {
 
 					{/* Строка поиска */}
 					<div className="hidden lg:flex relative w-1/3">
-						<input
-							type="text"
-							placeholder="Поиск..."
-							className="w-full py-2 px-4 pr-10 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
-						/>
-						<button className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-orange-500">
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								className="h-5 w-5"
-								fill="none"
-								viewBox="0 0 24 24"
-								stroke="currentColor"
-							>
-								<path
-									strokeLinecap="round"
-									strokeLinejoin="round"
-									strokeWidth={2}
-									d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-								/>
-							</svg>
-						</button>
+						<SearchBar />
 					</div>
 
 					{/* Навигация для десктопа */}
 					<nav className="hidden md:flex items-center space-x-6">
 						<Link
 							to="/catalog"
-							className="text-gray-700 hover:text-orange-500 font-medium"
+							className="text-[var(--text-primary)] hover:text-[var(--accent-color)] font-medium"
 						>
 							Каталог
 						</Link>
 						<Link
 							to="/sales"
-							className="text-gray-700 hover:text-orange-500 font-medium"
+							className="text-[var(--text-primary)] hover:text-[var(--accent-color)] font-medium"
 						>
 							Акции
 						</Link>
 						<Link
 							to="/blog"
-							className="text-gray-700 hover:text-orange-500 font-medium"
+							className="text-[var(--text-primary)] hover:text-[var(--accent-color)] font-medium"
 						>
 							Блог
 						</Link>
 						<Link
 							to="/contacts"
-							className="text-gray-700 hover:text-orange-500 font-medium"
+							className="text-[var(--text-primary)] hover:text-[var(--accent-color)] font-medium"
 						>
 							Контакты
 						</Link>
 					</nav>
 
-					{/* Кнопки авторизации и корзины */}
+					{/* Кнопки авторизации, корзины и темы */}
 					<div className="flex items-center space-x-2">
-						<Link to="/cart" className="text-gray-700 hover:text-orange-500">
+						{/* Переключатель темы */}
+						<div className="mr-2">
+							<ThemeToggle />
+						</div>
+
+						<Link
+							to="/cart"
+							className="text-[var(--text-primary)] hover:text-[var(--accent-color)]"
+						>
 							<div className="relative">
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
@@ -129,7 +119,7 @@ const Header: FC = () => {
 									/>
 								</svg>
 								{totalItems > 0 && (
-									<span className="absolute -top-1 -right-1 bg-orange-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
+									<span className="absolute -top-1 -right-1 bg-[var(--accent-color)] text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
 										{totalItems}
 									</span>
 								)}
@@ -139,7 +129,7 @@ const Header: FC = () => {
 						{isAuthenticated ? (
 							<div className="relative" ref={profileMenuRef}>
 								<button
-									className="flex items-center text-gray-700 hover:text-orange-500 font-medium"
+									className="flex items-center text-[var(--text-primary)] hover:text-[var(--accent-color)] font-medium"
 									onClick={toggleProfileMenu}
 								>
 									<span className="mr-1">{currentUser?.name}</span>
@@ -158,28 +148,28 @@ const Header: FC = () => {
 								</button>
 
 								{profileMenuOpen && (
-									<div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-30">
+									<div className="absolute right-0 mt-2 w-48 bg-[var(--bg-color)] rounded-md shadow-lg py-1 z-30">
 										<Link
 											to="/profile"
-											className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+											className="block px-4 py-2 text-sm text-[var(--text-primary)] hover:bg-[var(--bg-secondary)]"
 										>
 											Мой профиль
 										</Link>
 										<Link
 											to="/orders"
-											className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+											className="block px-4 py-2 text-sm text-[var(--text-primary)] hover:bg-[var(--bg-secondary)]"
 										>
 											Мои заказы
 										</Link>
 										<Link
 											to="/favorites"
-											className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+											className="block px-4 py-2 text-sm text-[var(--text-primary)] hover:bg-[var(--bg-secondary)]"
 										>
 											Избранное
 										</Link>
 										<button
 											onClick={handleLogout}
-											className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+											className="block w-full text-left px-4 py-2 text-sm text-[var(--text-primary)] hover:bg-[var(--bg-secondary)]"
 										>
 											Выйти
 										</button>
@@ -190,14 +180,14 @@ const Header: FC = () => {
 							<div className="hidden md:flex items-center space-x-2">
 								<Link
 									to="/login"
-									className="text-gray-700 hover:text-orange-500 font-medium"
+									className="text-[var(--text-primary)] hover:text-[var(--accent-color)] font-medium"
 								>
 									Войти
 								</Link>
-								<span className="text-gray-400">|</span>
+								<span className="text-[var(--text-secondary)]">|</span>
 								<Link
 									to="/register"
-									className="text-gray-700 hover:text-orange-500 font-medium"
+									className="text-[var(--text-primary)] hover:text-[var(--accent-color)] font-medium"
 								>
 									Регистрация
 								</Link>
@@ -207,7 +197,7 @@ const Header: FC = () => {
 						{/* Кнопка мобильного меню */}
 						<button
 							onClick={toggleMobileMenu}
-							className="md:hidden text-gray-700 hover:text-orange-500"
+							className="md:hidden text-[var(--text-primary)] hover:text-[var(--accent-color)]"
 						>
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
@@ -229,49 +219,53 @@ const Header: FC = () => {
 
 				{/* Мобильное меню */}
 				{mobileMenuOpen && (
-					<div className="md:hidden mt-4 py-2 border-t border-gray-200">
+					<div className="md:hidden mt-4 py-2 border-t border-[var(--border-color)]">
+						{/* Поиск в мобильном меню */}
+						<div className="py-2">
+							<SearchBar />
+						</div>
 						<Link
 							to="/"
-							className="block py-2 text-gray-700 hover:text-orange-500 font-medium"
+							className="block py-2 text-[var(--text-primary)] hover:text-[var(--accent-color)] font-medium"
 						>
 							Главная
 						</Link>
 						<Link
 							to="/catalog"
-							className="block py-2 text-gray-700 hover:text-orange-500 font-medium"
+							className="block py-2 text-[var(--text-primary)] hover:text-[var(--accent-color)] font-medium"
 						>
 							Каталог
 						</Link>
 						<Link
 							to="/sales"
-							className="block py-2 text-gray-700 hover:text-orange-500 font-medium"
+							className="block py-2 text-[var(--text-primary)] hover:text-[var(--accent-color)] font-medium"
 						>
 							Акции
 						</Link>
 						<Link
 							to="/blog"
-							className="block py-2 text-gray-700 hover:text-orange-500 font-medium"
+							className="block py-2 text-[var(--text-primary)] hover:text-[var(--accent-color)] font-medium"
 						>
 							Блог
 						</Link>
 						<Link
 							to="/contacts"
-							className="block py-2 text-gray-700 hover:text-orange-500 font-medium"
+							className="block py-2 text-[var(--text-primary)] hover:text-[var(--accent-color)] font-medium"
 						>
 							Контакты
 						</Link>
 
 						{!isAuthenticated && (
-							<div className="pt-2 border-t border-gray-200 mt-2">
+							<div className="pt-2 border-t border-[var(--border-color)] mt-2">
 								<Link
 									to="/login"
-									className="block py-2 text-gray-700 hover:text-orange-500 font-medium"
+									className="block py-2 text-[var(--text-primary)] hover:text-[var(--accent-color)] font-medium"
 								>
 									Войти
 								</Link>
 								<Link
 									to="/register"
-									className="block py-2 text-gray-700 hover:text-orange-500 font-medium"
+									className="block py-2 text-[var(--text-primary)] hover:text-[var(--accent-color)] font-medium"
 								>
 									Регистрация
 								</Link>

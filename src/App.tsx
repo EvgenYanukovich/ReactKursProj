@@ -16,6 +16,9 @@ import OrderSuccessPage from "./pages/OrderSuccessPage";
 import OrdersPage from "./pages/OrdersPage";
 import FavoritesPage from "./pages/FavoritesPage";
 import ProductPage from "./pages/ProductPage";
+import SalesPage from "./pages/SalesPage";
+import BlogPage from "./pages/BlogPage";
+import BlogPostPage from "./pages/BlogPostPage";
 
 // Импорт компонентов авторизации
 import Login from "./components/auth/Login";
@@ -25,6 +28,7 @@ import Register from "./components/auth/Register";
 import { AuthProvider, AuthContext } from "./utils/AuthContext";
 import { CartProvider } from "./utils/CartContext";
 import { FavoritesProvider } from "./utils/FavoritesContext";
+import { ThemeProvider } from "./utils/ThemeContext";
 import { useContext } from "react";
 
 // Компонент защищенного маршрута
@@ -40,10 +44,11 @@ const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) =
 
 function App() {
 	return (
-		<AuthProvider>
-			<CartProvider>
-				<FavoritesProvider>
-					<Router>
+		<ThemeProvider>
+			<AuthProvider>
+				<CartProvider>
+					<FavoritesProvider>
+						<Router>
 					<Routes>
 						{/* Страницы авторизации */}
 						<Route path="/login" element={<Login />} />
@@ -54,6 +59,9 @@ function App() {
 							<Route index element={<HomePage />} />
 							<Route path="catalog" element={<CatalogPage />} />
 							<Route path="product/:id" element={<ProductPage />} />
+							<Route path="sales" element={<SalesPage />} />
+							<Route path="blog" element={<BlogPage />} />
+							<Route path="blog/:id" element={<BlogPostPage />} />
 							<Route path="contacts" element={<ContactsPage />} />
 							<Route path="cart" element={<CartPage />} />
 							<Route
@@ -114,6 +122,7 @@ function App() {
 				</FavoritesProvider>
 			</CartProvider>
 		</AuthProvider>
+	</ThemeProvider>
 	);
 }
 

@@ -1,9 +1,12 @@
 import { FC, useState, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import ProductCard from "../components/catalog/ProductCard";
 import type { Product } from "../types/Product";
 import productData from "../data/products.json";
 
 const CatalogPage: FC = () => {
+	const location = useLocation();
+	const navigate = useNavigate();
 	const [priceRange, setPriceRange] = useState<[number, number]>([0, 5000]);
 	const [products, setProducts] = useState<Product[]>([]);
 	const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
@@ -21,6 +24,8 @@ const CatalogPage: FC = () => {
 		petTypes: {
 			Кошки: false,
 			Собаки: false,
+			Грызуны: false,
+			Птицы: false,
 			Универсальное: false,
 		},
 		categories: {
@@ -36,6 +41,7 @@ const CatalogPage: FC = () => {
 		onlyNew: false,
 	});
 
+	// Обработка URL-параметров для фильтрации
 	useEffect(() => {
 		// Загрузка данных о товарах
 		setProducts(productData as Product[]);
@@ -47,7 +53,33 @@ const CatalogPage: FC = () => {
 			setPriceRange([0, maxPrice]);
 			setFilters((prev) => ({ ...prev, maxPrice }));
 		}
-	}, []);
+
+		// Получение параметров из URL
+		const searchParams = new URLSearchParams(location.search);
+		const categoryParam = searchParams.get("category");
+		const petTypeParam = searchParams.get("petType");
+
+		// Применение фильтров из URL
+		if (categoryParam || petTypeParam) {
+			const newFilters = { ...filters };
+
+			if (categoryParam && newFilters.categories.hasOwnProperty(categoryParam)) {
+				newFilters.categories = {
+					...newFilters.categories,
+					[categoryParam]: true,
+				};
+			}
+
+			if (petTypeParam && newFilters.petTypes.hasOwnProperty(petTypeParam)) {
+				newFilters.petTypes = {
+					...newFilters.petTypes,
+					[petTypeParam]: true,
+				};
+			}
+
+			setFilters(newFilters);
+		}
+	}, [location.search]);
 
 	// Применение фильтров при их изменении
 	useEffect(() => {
@@ -56,37 +88,50 @@ const CatalogPage: FC = () => {
 
 	// Функция для обновления фильтров
 	const handleFilterChange = (filterType: string, value: string | boolean | number[]) => {
-		setFilters((prev) => {
-			if (filterType === "petType") {
-				return {
-					...prev,
-					petTypes: {
-						...prev.petTypes,
-						[value as string]: !prev.petTypes[value as string],
-					},
-				};
-			} else if (filterType === "category") {
-				return {
-					...prev,
-					categories: {
-						...prev.categories,
-						[value as string]: !prev.categories[value as string],
-					},
-				};
-			} else if (filterType === "priceRange") {
-				const priceValues = value as number[];
-				return {
-					...prev,
-					minPrice: priceValues[0],
-					maxPrice: priceValues[1],
-				};
+		const newFilters = { ...filters };
+
+		if (filterType === "petType") {
+			newFilters.petTypes = {
+				...newFilters.petTypes,
+				[value as string]: !newFilters.petTypes[value as string],
+			};
+
+			// Обновление URL
+			const searchParams = new URLSearchParams(location.search);
+			if (newFilters.petTypes[value as string]) {
+				searchParams.set("petType", value as string);
 			} else {
-				return {
-					...prev,
-					[filterType]: value,
-				};
+				searchParams.delete("petType");
 			}
-		});
+			navigate({ search: searchParams.toString() }, { replace: true });
+		} else if (filterType === "category") {
+			newFilters.categories = {
+				...newFilters.categories,
+				[value as string]: !newFilters.categories[value as string],
+			};
+
+			// Обновление URL
+			const searchParams = new URLSearchParams(location.search);
+			if (newFilters.categories[value as string]) {
+				searchParams.set("category", value as string);
+			} else {
+				searchParams.delete("category");
+			}
+			navigate({ search: searchParams.toString() }, { replace: true });
+		} else if (filterType === "priceRange") {
+			const priceValues = value as number[];
+			newFilters.minPrice = priceValues[0];
+			newFilters.maxPrice = priceValues[1];
+		} else if (
+			filterType === "onlyInStock" ||
+			filterType === "onlySale" ||
+			filterType === "onlyNew"
+		) {
+			// Для флагов фильтрации
+			(newFilters as any)[filterType] = value;
+		}
+
+		setFilters(newFilters);
 	};
 
 	// Функция сортировки товаров
@@ -174,12 +219,17 @@ const CatalogPage: FC = () => {
 	};
 
 	return (
-		<div className="container mx-auto px-4 py-8">
-			<h1 className="text-3xl font-bold mb-8">Каталог товаров</h1>
+		<div className="container mx-auto px-4 py-8 bg-[var(--bg-body)]">
+			<h1 className="text-3xl font-bold mb-8 text-[var(--text-primary)]">Каталог товаров</h1>
 
 			<div className="flex flex-col md:flex-row align-start">
 				{/* Фильтры */}
-				<div className="md:w-1/4 p-4 bg-white rounded-lg shadow-md h-[max-content]">
+				<div
+					className="md:w-1/4 p-4 bg-[var(--bg-primary)] rounded-lg h-[max-content]"
+					style={{
+						boxShadow: "0 4px 6px -1px var(--shadow-color)",
+					}}
+				>
 					<h2 className="text-xl font-semibold mb-4">Фильтры</h2>
 
 					{/* Фильтр по типу животного */}
@@ -192,7 +242,7 @@ const CatalogPage: FC = () => {
 										type="checkbox"
 										checked={checked}
 										onChange={() => handleFilterChange("petType", petType)}
-										className="form-checkbox h-4 w-4 text-orange-500"
+										className="form-checkbox h-4 w-4 text-[var(--accent-color)]"
 									/>
 									<span className="ml-2">{petType}</span>
 								</label>
@@ -210,7 +260,7 @@ const CatalogPage: FC = () => {
 										type="checkbox"
 										checked={checked}
 										onChange={() => handleFilterChange("category", category)}
-										className="form-checkbox h-4 w-4 text-orange-500"
+										className="form-checkbox h-4 w-4 text-[var(--accent-color)]"
 									/>
 									<span className="ml-2">{category}</span>
 								</label>
@@ -238,7 +288,7 @@ const CatalogPage: FC = () => {
 											filters.maxPrice,
 										])
 									}
-									className="w-1/2 p-1 border border-gray-300 rounded-md text-sm"
+									className="w-1/2 p-1 border border-[var(--border-color)] rounded-md text-sm"
 								/>
 								<input
 									type="number"
@@ -251,7 +301,7 @@ const CatalogPage: FC = () => {
 											parseInt(e.target.value) || filters.minPrice,
 										])
 									}
-									className="w-1/2 p-1 border border-gray-300 rounded-md text-sm"
+									className="w-1/2 p-1 border border-[var(--border-color)] rounded-md text-sm"
 								/>
 							</div>
 							<input
@@ -265,7 +315,7 @@ const CatalogPage: FC = () => {
 										parseInt(e.target.value),
 									])
 								}
-								className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer mt-4"
+								className="w-full h-2 bg-[var(--bg-secondary)] rounded-lg appearance-none cursor-pointer mt-4"
 							/>
 						</div>
 					</div>
@@ -281,7 +331,7 @@ const CatalogPage: FC = () => {
 									onChange={() =>
 										handleFilterChange("onlyInStock", !filters.onlyInStock)
 									}
-									className="form-checkbox h-4 w-4 text-orange-500"
+									className="form-checkbox h-4 w-4 text-[var(--accent-color)]"
 								/>
 								<span className="ml-2">Только в наличии</span>
 							</label>
@@ -292,7 +342,7 @@ const CatalogPage: FC = () => {
 									onChange={() =>
 										handleFilterChange("onlySale", !filters.onlySale)
 									}
-									className="form-checkbox h-4 w-4 text-orange-500"
+									className="form-checkbox h-4 w-4 text-[var(--accent-color)]"
 								/>
 								<span className="ml-2">Только со скидкой</span>
 							</label>
@@ -301,7 +351,7 @@ const CatalogPage: FC = () => {
 									type="checkbox"
 									checked={filters.onlyNew}
 									onChange={() => handleFilterChange("onlyNew", !filters.onlyNew)}
-									className="form-checkbox h-4 w-4 text-orange-500"
+									className="form-checkbox h-4 w-4 text-[var(--accent-color)]"
 								/>
 								<span className="ml-2">Новинки</span>
 							</label>
@@ -313,15 +363,15 @@ const CatalogPage: FC = () => {
 				<div className="md:w-3/4 md:pl-6 mt-6 md:mt-0">
 					<div className="flex justify-between items-center mb-6">
 						<div>
-							<span className="text-gray-500">
+							<span className="text-[var(--text-secondary)]">
 								Найдено: {products.length} товаров
 							</span>
 						</div>
 
 						<div className="flex items-center">
-							<span className="mr-2 text-gray-700">Сортировка:</span>
+							<span className="mr-2 text-[var(--text-primary)]">Сортировка:</span>
 							<select
-								className="p-2 border border-gray-300 rounded-md"
+								className="p-2 border border-[var(--border-color)] rounded-md"
 								value={sortType}
 								onChange={(e) => {
 									setSortType(e.target.value);
@@ -349,7 +399,7 @@ const CatalogPage: FC = () => {
 					{/* Пагинация */}
 					<div className="mt-8 flex justify-center">
 						<nav className="flex items-center space-x-1">
-							<button className="p-2 border rounded-md text-gray-600 hover:bg-gray-50">
+							<button className="p-2 border rounded-md text-[var(--text-secondary)] hover:bg-[var(--bg-hover)]">
 								<svg
 									className="w-5 h-5"
 									fill="none"
@@ -364,22 +414,22 @@ const CatalogPage: FC = () => {
 									/>
 								</svg>
 							</button>
-							<button className="px-4 py-2 border rounded-md bg-orange-500 text-white">
+							<button className="px-4 py-2 border rounded-md bg-[var(--accent-color)] text-white">
 								1
 							</button>
-							<button className="px-4 py-2 border rounded-md text-gray-600 hover:bg-gray-50">
+							<button className="px-4 py-2 border rounded-md text-[var(--text-secondary)] hover:bg-[var(--bg-hover)]">
 								2
 							</button>
-							<button className="px-4 py-2 border rounded-md text-gray-600 hover:bg-gray-50">
+							<button className="px-4 py-2 border rounded-md text-[var(--text-secondary)] hover:bg-[var(--bg-hover)]">
 								3
 							</button>
-							<button className="px-4 py-2 border rounded-md text-gray-600 hover:bg-gray-50">
+							<button className="px-4 py-2 border rounded-md text-[var(--text-secondary)] hover:bg-[var(--bg-hover)]">
 								4
 							</button>
-							<button className="px-4 py-2 border rounded-md text-gray-600 hover:bg-gray-50">
+							<button className="px-4 py-2 border rounded-md text-[var(--text-secondary)] hover:bg-[var(--bg-hover)]">
 								5
 							</button>
-							<button className="p-2 border rounded-md text-gray-600 hover:bg-gray-50">
+							<button className="p-2 border rounded-md text-[var(--text-secondary)] hover:bg-[var(--bg-hover)]">
 								<svg
 									className="w-5 h-5"
 									fill="none"

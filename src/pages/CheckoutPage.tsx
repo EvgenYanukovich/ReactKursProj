@@ -128,34 +128,43 @@ const CheckoutPage: FC = () => {
 	const finalTotal = totalPrice + deliveryPrice;
 
 	return (
-		<div className="container mx-auto px-4 py-8">
+		<div className="container mx-auto px-4 py-8 bg-[var(--bg-body)]">
 			{/* Хлебные крошки */}
 			<div className="flex items-center mb-6">
-				<Link to="/" className="text-gray-600 hover:text-orange-500">
+				<Link
+					to="/"
+					className="text-[var(--text-secondary)] hover:text-[var(--accent-color)]"
+				>
 					Главная
 				</Link>
-				<span className="mx-2 text-gray-400">&gt;</span>
-				<Link to="/cart" className="text-gray-600 hover:text-orange-500">
+				<span className="mx-2 text-[var(--text-secondary)]">&gt;</span>
+				<Link
+					to="/cart"
+					className="text-[var(--text-secondary)] hover:text-[var(--accent-color)]"
+				>
 					Корзина
 				</Link>
 				<span className="mx-2 text-gray-400">&gt;</span>
-				<span className="text-gray-800 font-medium">Оформление заказа</span>
+				<span className="text-[var(--text-primary)] font-medium">Оформление заказа</span>
 			</div>
 
 			<h1 className="text-3xl font-bold mb-8">Оформление заказа</h1>
-			<p className="text-gray-600 mb-8">
+			<p className="text-[var(--text-secondary)] mb-8">
 				Заполните форму, чтобы завершить оформление вашего заказа
 			</p>
 
 			<form onSubmit={handleSubmit} className="grid grid-cols-1 lg:grid-cols-3 gap-8">
 				{/* Левая колонка - Персональные данные */}
 				<div className="lg:col-span-2 space-y-6">
-					<div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+					<div className="bg-[var(--bg-primary)] p-6 rounded-lg shadow-sm border border-[var(--border-color)]">
 						<h2 className="text-xl font-bold mb-4">Персональные данные</h2>
 
 						<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 							<div>
-								<label htmlFor="fullName" className="block text-gray-700 mb-1">
+								<label
+									htmlFor="fullName"
+									className="block text-[var(--text-secondary)] mb-1"
+								>
 									Имя и фамилия*
 								</label>
 								<input
@@ -165,7 +174,7 @@ const CheckoutPage: FC = () => {
 									onChange={(e) => setFullName(e.target.value)}
 									className={`w-full px-4 py-2 border ${
 										formErrors.fullName ? "border-red-500" : "border-gray-300"
-									} rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent`}
+									} rounded-md focus:outline-none focus:ring-2 focus:ring-[var(--accent-color)] focus:border-transparent`}
 								/>
 								{formErrors.fullName && (
 									<p className="text-red-500 text-sm mt-1">
@@ -175,7 +184,10 @@ const CheckoutPage: FC = () => {
 							</div>
 
 							<div>
-								<label htmlFor="email" className="block text-gray-700 mb-1">
+								<label
+									htmlFor="email"
+									className="block text-[var(--text-secondary)] mb-1"
+								>
 									Электронная почта*
 								</label>
 								<input
@@ -185,7 +197,7 @@ const CheckoutPage: FC = () => {
 									onChange={(e) => setEmail(e.target.value)}
 									className={`w-full px-4 py-2 border ${
 										formErrors.email ? "border-red-500" : "border-gray-300"
-									} rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent`}
+									} rounded-md focus:outline-none focus:ring-2 focus:ring-[var(--accent-color)] focus:border-transparent`}
 								/>
 								{formErrors.email && (
 									<p className="text-red-500 text-sm mt-1">{formErrors.email}</p>
@@ -194,7 +206,10 @@ const CheckoutPage: FC = () => {
 						</div>
 
 						<div className="mt-4">
-							<label htmlFor="phone" className="block text-gray-700 mb-1">
+							<label
+								htmlFor="phone"
+								className="block text-[var(--text-secondary)] mb-1"
+							>
 								Телефон*
 							</label>
 							<input
@@ -205,7 +220,7 @@ const CheckoutPage: FC = () => {
 								placeholder="+7 (___) ___-__-__"
 								className={`w-full px-4 py-2 border ${
 									formErrors.phone ? "border-red-500" : "border-gray-300"
-								} rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent`}
+								} rounded-md focus:outline-none focus:ring-2 focus:ring-[var(--accent-color)] focus:border-transparent`}
 							/>
 							{formErrors.phone && (
 								<p className="text-red-500 text-sm mt-1">{formErrors.phone}</p>
@@ -214,11 +229,14 @@ const CheckoutPage: FC = () => {
 					</div>
 
 					{/* Адрес доставки */}
-					<div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+					<div className="bg-[var(--bg-primary)] p-6 rounded-lg shadow-sm border border-[var(--border-color)]">
 						<h2 className="text-xl font-bold mb-4">Адрес доставки</h2>
 
 						<div>
-							<label htmlFor="address" className="block text-gray-700 mb-1">
+							<label
+								htmlFor="address"
+								className="block text-[var(--text-secondary)] mb-1"
+							>
 								Адрес*
 							</label>
 							<input
@@ -229,7 +247,7 @@ const CheckoutPage: FC = () => {
 								placeholder="Улица, дом, квартира"
 								className={`w-full px-4 py-2 border ${
 									formErrors.address ? "border-red-500" : "border-gray-300"
-								} rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent`}
+								} rounded-md focus:outline-none focus:ring-2 focus:ring-[var(--accent-color)] focus:border-transparent`}
 							/>
 							{formErrors.address && (
 								<p className="text-red-500 text-sm mt-1">{formErrors.address}</p>
@@ -238,7 +256,10 @@ const CheckoutPage: FC = () => {
 
 						<div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
 							<div>
-								<label htmlFor="city" className="block text-gray-700 mb-1">
+								<label
+									htmlFor="city"
+									className="block text-[var(--text-secondary)] mb-1"
+								>
 									Город*
 								</label>
 								<input
@@ -248,7 +269,7 @@ const CheckoutPage: FC = () => {
 									onChange={(e) => setCity(e.target.value)}
 									className={`w-full px-4 py-2 border ${
 										formErrors.city ? "border-red-500" : "border-gray-300"
-									} rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent`}
+									} rounded-md focus:outline-none focus:ring-2 focus:ring-[var(--accent-color)] focus:border-transparent`}
 								/>
 								{formErrors.city && (
 									<p className="text-red-500 text-sm mt-1">{formErrors.city}</p>
@@ -256,7 +277,10 @@ const CheckoutPage: FC = () => {
 							</div>
 
 							<div>
-								<label htmlFor="postalCode" className="block text-gray-700 mb-1">
+								<label
+									htmlFor="postalCode"
+									className="block text-[var(--text-secondary)] mb-1"
+								>
 									Почтовый индекс*
 								</label>
 								<input
@@ -266,7 +290,7 @@ const CheckoutPage: FC = () => {
 									onChange={(e) => setPostalCode(e.target.value)}
 									className={`w-full px-4 py-2 border ${
 										formErrors.postalCode ? "border-red-500" : "border-gray-300"
-									} rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent`}
+									} rounded-md focus:outline-none focus:ring-2 focus:ring-[var(--accent-color)] focus:border-transparent`}
 								/>
 								{formErrors.postalCode && (
 									<p className="text-red-500 text-sm mt-1">
@@ -278,65 +302,65 @@ const CheckoutPage: FC = () => {
 					</div>
 
 					{/* Способ доставки */}
-					<div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+					<div className="bg-[var(--bg-primary)] p-6 rounded-lg shadow-sm border border-[var(--border-color)]">
 						<h2 className="text-xl font-bold mb-4">Способ доставки</h2>
 
 						<div className="space-y-3">
-							<label className="flex items-center border border-gray-200 p-2 rounded-md">
+							<label className="flex items-center border border-[var(--border-color)] p-2 rounded-md">
 								<input
 									type="radio"
 									name="deliveryMethod"
 									value="courier"
 									checked={deliveryMethod === "courier"}
 									onChange={() => setDeliveryMethod("courier")}
-									className="h-5 w-5 text-orange-500 focus:ring-orange-500"
+									className="h-5 w-5 text-[var(--accent-color)] focus:ring-[var(--accent-color)]"
 								/>
 								<div className="ml-3">
 									<span className="block font-medium">Курьер</span>
-									<span className="text-sm text-gray-500">
+									<span className="text-sm text-[var(--text-secondary)]">
 										Доставка курьером до двери (1-2 дня)
 									</span>
-									<span className="block font-medium text-gray-800 mt-1">
+									<span className="block font-medium text-[var(--text-primary)] mt-1">
 										300 ₽
 									</span>
 								</div>
 							</label>
 
-							<label className="flex items-center">
+							<label className="flex items-center border border-[var(--border-color)] p-2 rounded-md">
 								<input
 									type="radio"
 									name="deliveryMethod"
 									value="pickup"
 									checked={deliveryMethod === "pickup"}
 									onChange={() => setDeliveryMethod("pickup")}
-									className="h-5 w-5 text-orange-500 focus:ring-orange-500"
+									className="h-5 w-5 text-[var(--accent-color)] focus:ring-[var(--accent-color)]"
 								/>
 								<div className="ml-3">
 									<span className="block font-medium">Почта России</span>
-									<span className="text-sm text-gray-500">
+									<span className="text-sm text-[var(--text-secondary)]">
 										Доставка в ближайшее отделение (3-7 дней)
 									</span>
-									<span className="block font-medium text-gray-800 mt-1">
+									<span className="block font-medium text-[var(--text-primary)] mt-1">
 										200 ₽
 									</span>
 								</div>
 							</label>
 
-							<label className="flex items-center">
+							<label className="flex items-center border border-[var(--border-color)] p-2 rounded-md">
 								<input
 									type="radio"
 									name="deliveryMethod"
 									value="selfPickup"
 									checked={deliveryMethod === "selfPickup"}
 									onChange={() => setDeliveryMethod("selfPickup")}
-									className="h-5 w-5 text-orange-500 focus:ring-orange-500"
+									className="h-5 w-5 text-[var(--accent-color)] focus:ring-[var(--accent-color)]"
 								/>
 								<div className="ml-3">
 									<span className="block font-medium">Самовывоз</span>
-									<span className="text-sm text-gray-500">
+									<span className="text-sm text-[var(--text-secondary)]">
 										Вы заберёте заказ самостоятельно из нашего магазина
 									</span>
-									<span className="block font-medium text-gray-800 mt-1">
+									<span className="block font-medium text-[var(--text-primary)] mt-1">
 										Бесплатно
 									</span>
 								</div>
@@ -345,7 +369,7 @@ const CheckoutPage: FC = () => {
 					</div>
 
 					{/* Выбор даты доставки */}
-					<div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100 mt-4">
+					<div className="bg-[var(--bg-primary)] p-6 rounded-lg shadow-sm border border-[var(--border-color)] mt-4">
 						<DeliveryDatePicker
 							selectedDeliveryMethod={deliveryMethod}
 							onDateSelect={(date, time) => {
@@ -359,22 +383,22 @@ const CheckoutPage: FC = () => {
 					</div>
 
 					{/* Способ оплаты */}
-					<div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+					<div className="bg-[var(--bg-primary)] p-6 rounded-lg shadow-sm border border-[var(--border-color)]">
 						<h2 className="text-xl font-bold mb-4">Способ оплаты</h2>
 
 						<div className="space-y-3">
-							<label className="flex items-center">
+							<label className="flex items-center border border-[var(--border-color)] p-2 rounded-md">
 								<input
 									type="radio"
 									name="paymentMethod"
 									value="card"
 									checked={paymentMethod === "card"}
 									onChange={() => setPaymentMethod("card")}
-									className="h-5 w-5 text-orange-500 focus:ring-orange-500"
+									className="h-5 w-5 text-[var(--accent-color)] focus:ring-[var(--accent-color)]"
 								/>
 								<div className="ml-3">
 									<span className="block font-medium">Банковская карта</span>
-									<span className="text-sm text-gray-500">
+									<span className="text-sm text-[var(--text-secondary)]">
 										Visa, MasterCard, Мир
 									</span>
 									<div className="flex mt-1 space-x-2">
@@ -397,37 +421,37 @@ const CheckoutPage: FC = () => {
 								</div>
 							</label>
 
-							<label className="flex items-center">
+							<label className="flex items-center border border-[var(--border-color)] p-2 rounded-md">
 								<input
 									type="radio"
 									name="paymentMethod"
 									value="sbp"
 									checked={paymentMethod === "sbp"}
 									onChange={() => setPaymentMethod("sbp")}
-									className="h-5 w-5 text-orange-500 focus:ring-orange-500"
+									className="h-5 w-5 text-[var(--accent-color)] focus:ring-[var(--accent-color)]"
 								/>
 								<div className="ml-3">
 									<span className="block font-medium">
 										Система быстрых платежей
 									</span>
-									<span className="text-sm text-gray-500">
+									<span className="text-sm text-[var(--text-secondary)]">
 										Оплата по QR-коду через мобильный банк
 									</span>
 								</div>
 							</label>
 
-							<label className="flex items-center">
+							<label className="flex items-center border border-[var(--border-color)] p-2 rounded-md">
 								<input
 									type="radio"
 									name="paymentMethod"
 									value="cash"
 									checked={paymentMethod === "cash"}
 									onChange={() => setPaymentMethod("cash")}
-									className="h-5 w-5 text-orange-500 focus:ring-orange-500"
+									className="h-5 w-5 text-[var(--accent-color)] focus:ring-[var(--accent-color)]"
 								/>
 								<div className="ml-3">
 									<span className="block font-medium">Оплата при получении</span>
-									<span className="text-sm text-gray-500">
+									<span className="text-sm text-[var(--text-secondary)]">
 										Наличными или картой при получении
 									</span>
 								</div>
@@ -438,7 +462,7 @@ const CheckoutPage: FC = () => {
 
 				{/* Правая колонка - Сумма заказа */}
 				<div className="lg:col-span-1">
-					<div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100 sticky top-4">
+					<div className="bg-[var(--bg-primary)] p-6 rounded-lg shadow-sm border border-[var(--border-color)] sticky top-4">
 						<h2 className="text-xl font-bold mb-4">Ваш заказ</h2>
 
 						<div className="space-y-4 mb-4">
@@ -448,7 +472,7 @@ const CheckoutPage: FC = () => {
 									className="flex items-center justify-between"
 								>
 									<div className="flex items-center">
-										<div className="w-12 h-12 flex-shrink-0 bg-gray-100 rounded-md overflow-hidden">
+										<div className="w-12 h-12 flex-shrink-0 bg-[var(--bg-secondary)] rounded-md overflow-hidden">
 											<img
 												src={
 													item.product.imageUrl ||
@@ -459,15 +483,15 @@ const CheckoutPage: FC = () => {
 											/>
 										</div>
 										<div className="ml-3">
-											<p className="text-sm font-medium text-gray-800">
+											<p className="text-sm font-medium text-[var(--text-primary)]">
 												{item.product.name}
 											</p>
-											<p className="text-xs text-gray-500">
+											<p className="text-xs text-[var(--text-secondary)]">
 												{item.quantity} шт.
 											</p>
 										</div>
 									</div>
-									<span className="font-medium text-gray-800">
+									<span className="font-medium text-[var(--text-primary)]">
 										{item.product.price * item.quantity} ₽
 									</span>
 								</div>
@@ -476,19 +500,21 @@ const CheckoutPage: FC = () => {
 
 						<div className="space-y-2 mb-4">
 							<div className="flex justify-between">
-								<span className="text-gray-600">Товары ({cartItems.length})</span>
+								<span className="text-[var(--text-secondary)]">
+									Товары ({cartItems.length})
+								</span>
 								<span className="font-medium">{totalPrice} ₽</span>
 							</div>
 
 							<div className="flex justify-between">
-								<span className="text-gray-600">Доставка</span>
+								<span className="text-[var(--text-secondary)]">Доставка</span>
 								<span>
 									{deliveryPrice > 0 ? `${deliveryPrice} ₽` : "Бесплатно"}
 								</span>
 							</div>
 						</div>
 
-						<div className="border-t border-gray-200 pt-4 mb-6">
+						<div className="border-t border-[var(--border-color)] pt-4 mb-6">
 							<div className="flex justify-between items-center">
 								<span className="font-bold text-lg">Итого</span>
 								<span className="font-bold text-lg">{finalTotal} ₽</span>
@@ -498,17 +524,17 @@ const CheckoutPage: FC = () => {
 						<button
 							type="submit"
 							disabled={isSubmitting}
-							className="w-full py-3 bg-orange-500 text-white rounded-md hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 font-medium disabled:bg-gray-400 disabled:cursor-not-allowed"
+							className="w-full py-3 bg-[var(--accent-color)] text-white rounded-md hover:bg-[var(--accent-hover)] focus:outline-none focus:ring-2 focus:ring-[var(--accent-color)] focus:ring-offset-2 font-medium disabled:bg-[var(--bg-secondary)] disabled:cursor-not-allowed"
 						>
 							{isSubmitting ? "Оформление..." : "Подтвердить заказ"}
 						</button>
 
-						<p className="text-xs text-gray-500 mt-4 text-center">
+						<p className="text-xs text-[var(--text-secondary)] mt-4 text-center">
 							Нажимая кнопку "Подтвердить заказ", вы соглашаетесь с условиями
 							публичной оферты и политикой конфиденциальности
 						</p>
 
-						<div className="mt-4 flex justify-center items-center text-gray-500 text-sm">
+						<div className="mt-4 flex justify-center items-center text-[var(--text-secondary)] text-sm">
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
 								className="h-5 w-5 mr-1"

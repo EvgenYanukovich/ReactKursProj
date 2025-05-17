@@ -39,15 +39,15 @@ const Login: FC = () => {
 	};
 
 	return (
-		<div className="min-h-screen flex items-center justify-center px-4 py-12 bg-gray-50">
+		<div className="min-h-screen flex items-center justify-center px-4 py-12 bg-[var(--bg-secondary)]">
 			<div className="form-container">
-				<h2 className="text-2xl font-bold text-center text-gray-800 mb-6">
+				<h2 className="text-2xl font-bold text-center text-[var(--text-secondary)] mb-6">
 					Вход в аккаунт
 				</h2>
 
 				{error && (
 					<div
-						className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4"
+						className="bg-[var(--accent-color)] border border-[var(--border-color)] text-[var(--text-primary)] px-4 py-3 rounded mb-4"
 						role="alert"
 					>
 						<span>{error}</span>
@@ -58,7 +58,7 @@ const Login: FC = () => {
 					<div className="mb-4">
 						<label
 							htmlFor="email"
-							className="block text-gray-700 text-sm font-medium mb-2"
+							className="block text-[var(--text-primary)] text-sm font-medium mb-2"
 						>
 							Email
 						</label>
@@ -75,7 +75,7 @@ const Login: FC = () => {
 					<div className="mb-6">
 						<label
 							htmlFor="password"
-							className="block text-gray-700 text-sm font-medium mb-2"
+							className="block text-[var(--text-primary)] text-sm font-medium mb-2"
 						>
 							Пароль
 						</label>
@@ -95,11 +95,11 @@ const Login: FC = () => {
 				</form>
 
 				<div className="mt-6 text-center">
-					<p className="text-sm text-gray-600">
+					<p className="text-sm text-[var(--text-secondary)]">
 						Еще нет аккаунта?{" "}
 						<Link
 							to="/register"
-							className="text-orange-500 hover:text-orange-600 font-medium"
+							className="text-[var(--accent-color)] hover:text-[var(--accent-hover)] font-medium"
 						>
 							Зарегистрироваться
 						</Link>

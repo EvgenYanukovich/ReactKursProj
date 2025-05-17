@@ -109,18 +109,18 @@ const ReviewList: FC<ReviewListProps> = ({ productId }) => {
   return (
     <div>
       {/* Общая статистика отзывов */}
-      <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100 mb-6">
+      <div className="bg-[var(--bg-primary)] p-6 rounded-lg shadow-sm border border-[var(--border-color)] mb-6">
         <div className="flex flex-col md:flex-row gap-6">
           <div className="md:w-1/4 flex flex-col items-center justify-center">
-            <div className="text-4xl font-bold text-gray-800 mb-2">{averageRating.toFixed(1)}</div>
+            <div className="text-4xl font-bold text-[var(--text-primary)] mb-2">{averageRating.toFixed(1)}</div>
             <StarRating rating={averageRating} size="lg" />
-            <div className="text-sm text-gray-600 mt-2">{reviews.length} отзывов</div>
+            <div className="text-sm text-[var(--text-secondary)] mt-2">{reviews.length} отзывов</div>
           </div>
 
           <div className="md:w-3/4">
             {ratingCounts.map(({ rating: ratingValue, percentage }) => (
               <div key={ratingValue} className="flex items-center mb-2">
-                <div className="w-12 text-sm text-gray-600">{ratingValue} звезд</div>
+                <div className="w-12 text-sm text-[var(--text-secondary)]">{ratingValue} звезд</div>
                 <div className="flex-grow mx-3">
                   <div className="h-2 bg-gray-200 rounded-full">
                     <div
@@ -129,7 +129,7 @@ const ReviewList: FC<ReviewListProps> = ({ productId }) => {
                     ></div>
                   </div>
                 </div>
-                <div className="w-8 text-sm text-gray-600">{percentage}%</div>
+                <div className="w-8 text-sm text-[var(--text-secondary)]">{percentage}%</div>
               </div>
             ))}
           </div>
@@ -146,7 +146,7 @@ const ReviewList: FC<ReviewListProps> = ({ productId }) => {
                 }
                 setShowForm(true);
               }}
-              className="bg-orange-500 hover:bg-orange-600 text-white py-2 px-4 rounded-md"
+              className="bg-[var(--accent-color)] hover:bg-[var(--accent-hover)] text-white py-2 px-4 rounded-md"
             >
               Написать отзыв
             </button>
@@ -156,26 +156,26 @@ const ReviewList: FC<ReviewListProps> = ({ productId }) => {
 
       {/* Форма для отзыва */}
       {showForm && (
-        <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100 mb-6">
+        <div className="bg-[var(--bg-primary)] p-6 rounded-lg shadow-sm border border-[var(--border-color)] mb-6">
           <h3 className="text-xl font-bold mb-4">Оставить отзыв</h3>
           <form onSubmit={handleSubmitReview}>
             <div className="mb-4">
-              <label className="block text-gray-700 mb-2">Ваше имя*</label>
+              <label className="block text-[var(--text-secondary)] mb-2">Ваше имя*</label>
               <input
                 type="text"
                 value={authorName}
                 onChange={(e) => setAuthorName(e.target.value)}
                 className={`w-full px-4 py-2 border ${
-                  formErrors.authorName ? "border-red-500" : "border-gray-300"
+                  formErrors.authorName ? "border-red-300" : "border-[var(--border-color)]"
                 } rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent`}
               />
               {formErrors.authorName && (
-                <p className="text-red-500 text-sm mt-1">{formErrors.authorName}</p>
+                <p className="text-red-300 text-sm mt-1">{formErrors.authorName}</p>
               )}
             </div>
 
             <div className="mb-4">
-              <label className="block text-gray-700 mb-2">Ваша оценка*</label>
+              <label className="block text-[var(--text-secondary)] mb-2">Ваша оценка*</label>
               <div className="flex items-center space-x-1 mb-4">
                 {[1, 2, 3, 4, 5].map((star) => (
                   <button
@@ -188,29 +188,29 @@ const ReviewList: FC<ReviewListProps> = ({ productId }) => {
                     ★
                   </button>
                 ))}
-                <span className="ml-2 text-gray-600">{rating} из 5</span>
+                <span className="ml-2 text-[var(--text-secondary)]">{rating} из 5</span>
               </div>
             </div>
 
             <div className="mb-4">
-              <label className="block text-gray-700 mb-2">Текст отзыва*</label>
+              <label className="block text-[var(--text-secondary)] mb-2">Текст отзыва*</label>
               <textarea
                 value={reviewText}
                 onChange={(e) => setReviewText(e.target.value)}
                 rows={4}
                 className={`w-full px-4 py-2 border ${
-                  formErrors.reviewText ? "border-red-500" : "border-gray-300"
+                  formErrors.reviewText ? "border-red-300" : "border-[var(--border-color)]"
                 } rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent`}
               ></textarea>
               {formErrors.reviewText && (
-                <p className="text-red-500 text-sm mt-1">{formErrors.reviewText}</p>
+                <p className="text-red-300 text-sm mt-1">{formErrors.reviewText}</p>
               )}
             </div>
             
             <div className="flex justify-end">
               <button
                 type="submit"
-                className="bg-orange-500 hover:bg-orange-600 text-white py-2 px-4 rounded-md"
+                className="bg-[var(--accent-color)] hover:bg-[var(--accent-hover)] text-white py-2 px-4 rounded-md"
               >
                 Отправить отзыв
               </button>
@@ -223,13 +223,13 @@ const ReviewList: FC<ReviewListProps> = ({ productId }) => {
       {reviews.length > 0 ? (
         <div className="space-y-6">
           {reviews.map((review: Review) => (
-            <div key={review.id} className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+            <div key={review.id} className="bg-[var(--bg-primary)] p-6 rounded-lg shadow-sm border border-[var(--border-color)]">
               <div className="flex justify-between items-start mb-2">
                 <div>
                   <div className="flex items-center">
                     <h3 className="font-bold text-lg">{review.author}</h3>
                     {review.verified && (
-                      <span className="ml-2 bg-green-100 text-green-800 text-xs px-2 py-1 rounded">
+                      <span className="ml-2 bg-green-900/20 text-green-300 text-xs px-2 py-1 rounded">
                         Проверенный покупатель
                       </span>
                     )}
@@ -238,13 +238,13 @@ const ReviewList: FC<ReviewListProps> = ({ productId }) => {
                     <StarRating rating={review.rating} />
                   </div>
                 </div>
-                <div className="text-sm text-gray-500">{review.date}</div>
+                <div className="text-sm text-[var(--text-secondary)]">{review.date}</div>
               </div>
-              <p className="text-gray-700 mt-3">{review.text}</p>
-              <div className="mt-4 flex items-center text-sm text-gray-500">
+              <p className="text-[var(--text-secondary)] mt-3">{review.text}</p>
+              <div className="mt-4 flex items-center text-sm text-[var(--text-secondary)]">
                 <button 
                   onClick={() => handleHelpfulClick(review.id)}
-                  className={`flex items-center ${isHelpful(review.id) ? 'text-orange-500' : 'hover:text-orange-500'}`}
+                  className={`flex items-center ${isHelpful(review.id) ? 'text-[var(--accent-color)]' : 'hover:text-[var(--accent-color)]'}`}
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill={isHelpful(review.id) ? "currentColor" : "none"} viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />
@@ -256,8 +256,8 @@ const ReviewList: FC<ReviewListProps> = ({ productId }) => {
           ))}
         </div>
       ) : (
-        <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100 text-center">
-          <p className="text-gray-600">У этого товара пока нет отзывов</p>
+        <div className="bg-[var(--bg-primary)] p-6 rounded-lg shadow-sm border border-[var(--border-color)] text-center">
+          <p className="text-[var(--text-secondary)]">У этого товара пока нет отзывов</p>
           <button 
             onClick={() => {
               if (!currentUser) {
@@ -266,7 +266,7 @@ const ReviewList: FC<ReviewListProps> = ({ productId }) => {
               }
               setShowForm(true);
             }} 
-            className="mt-4 text-orange-500 hover:text-orange-600 font-medium"
+            className="mt-4 text-[var(--accent-color)] hover:text-[var(--accent-hover)] font-medium"
           >
             Будьте первым, кто оставит отзыв
           </button>

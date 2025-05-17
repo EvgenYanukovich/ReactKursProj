@@ -87,20 +87,23 @@ const ProductPage: FC = () => {
 
 	if (isLoading) {
 		return (
-			<div className="container mx-auto px-4 py-8 flex justify-center">
-				<div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-orange-500"></div>
+			<div className="container mx-auto px-4 py-8 bg-[var(--bg-body)] flex justify-center">
+				<div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[var(--accent-color)]"></div>
 			</div>
 		);
 	}
 
 	if (!product) {
 		return (
-			<div className="container mx-auto px-4 py-8 text-center">
+			<div className="container mx-auto px-4 py-8 bg-[var(--bg-body)] text-center">
 				<h1 className="text-2xl font-bold mb-4">Товар не найден</h1>
 				<p className="mb-4">
 					К сожалению, запрашиваемый товар не существует или был удален.
 				</p>
-				<Link to="/catalog" className="text-orange-500 hover:text-orange-600">
+				<Link
+					to="/catalog"
+					className="text-[var(--accent-color)] hover:text-[var(--accent-hover)]"
+				>
 					Вернуться в каталог
 				</Link>
 			</div>
@@ -108,11 +111,11 @@ const ProductPage: FC = () => {
 	}
 
 	return (
-		<div className="container mx-auto px-4 py-8">
+		<div className="container mx-auto px-4 py-8 bg-[var(--bg-body)]">
 			<div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
 				{/* Галерея изображений */}
 				<div>
-					<div className="mb-4 border border-gray-200 rounded-lg overflow-hidden">
+					<div className="mb-4 border border-[var(--border-color)] rounded-lg overflow-hidden">
 						<img
 							src={activeImage || "https://via.placeholder.com/500"}
 							alt={product.name}
@@ -125,8 +128,8 @@ const ProductPage: FC = () => {
 						<button
 							className={`border ${
 								activeImage === product.imageUrl
-									? "border-orange-500"
-									: "border-gray-200"
+									? "border-[var(--accent-color)]"
+									: "border-[var(--border-color)]"
 							} rounded-md overflow-hidden`}
 							onClick={() => setActiveImage(product.imageUrl || "")}
 						>
@@ -141,8 +144,8 @@ const ProductPage: FC = () => {
 							<button
 								className={`border ${
 									activeImage === product.thumbnailUrl
-										? "border-orange-500"
-										: "border-gray-200"
+										? "border-[var(--accent-color)]"
+										: "border-[var(--border-color)]"
 								} rounded-md overflow-hidden`}
 								onClick={() => setActiveImage(product.thumbnailUrl || "")}
 							>
@@ -153,8 +156,6 @@ const ProductPage: FC = () => {
 								/>
 							</button>
 						)}
-
-						{/* Здесь можно добавить дополнительные изображения, если они есть */}
 					</div>
 				</div>
 
@@ -165,7 +166,7 @@ const ProductPage: FC = () => {
 					{/* Рейтинг и отзывы */}
 					<div className="flex items-center mb-2">
 						<StarRating rating={productRating} />
-						<span className="ml-2 text-gray-600">
+						<span className="ml-2 text-[var(--text-secondary)]">
 							({reviewCount}{" "}
 							{reviewCount === 1
 								? "отзыв"
@@ -215,17 +216,17 @@ const ProductPage: FC = () => {
 					{/* Выбор количества и кнопки действий */}
 					<div className="mb-6">
 						<div className="flex items-center mb-4">
-							<span className="mr-4 text-gray-700">Количество:</span>
+							<span className="mr-4 text-[var(--text-primary)]">Количество:</span>
 							<div className="flex items-center border border-gray-300 rounded-md">
 								<button
 									onClick={() => handleQuantityChange(quantity - 1)}
 									disabled={quantity <= 1}
-									className="px-3 py-1 text-gray-600 hover:bg-gray-100 disabled:opacity-50"
+									className="px-3 py-1 text-[var(--text-secondary)] hover:bg-gray-100 disabled:opacity-50"
 								>
 									-
 								</button>
 								<input
-									type="number"
+									type="text"
 									min="1"
 									value={quantity}
 									onChange={(e) =>
@@ -235,7 +236,7 @@ const ProductPage: FC = () => {
 								/>
 								<button
 									onClick={() => handleQuantityChange(quantity + 1)}
-									className="px-3 py-1 text-gray-600 hover:bg-gray-100"
+									className="px-3 py-1 text-[var(--text-secondary)] hover:bg-gray-100"
 								>
 									+
 								</button>
@@ -244,23 +245,22 @@ const ProductPage: FC = () => {
 
 						<div className="flex space-x-4">
 							<button
-								onClick={handleAddToCart}
+								onClick={() => handleAddToCart()}
 								disabled={!product.inStock}
 								className={`flex-grow py-3 px-6 rounded-md font-medium ${
 									product.inStock
-										? "bg-orange-500 hover:bg-orange-600 text-white"
-										: "bg-gray-200 text-gray-500 cursor-not-allowed"
+										? "bg-[var(--accent-color)] hover:bg-[var(--accent-hover)] text-white"
+										: "bg-[var(--bg-secondary)] text-[var(--text-secondary)] cursor-not-allowed"
 								}`}
 							>
 								{product.inStock ? "Добавить в корзину" : "Нет в наличии"}
 							</button>
-
 							<button
 								onClick={handleToggleFavorite}
 								className={`p-3 rounded-md ${
 									isInFavorites(product.id)
 										? "bg-red-50 text-red-500"
-										: "bg-gray-100 text-gray-500 hover:bg-gray-200"
+										: "bg-[var(--bg-secondary)] text-[var(--text-secondary)] hover:bg-[var(--bg-hover)]"
 								}`}
 								title={
 									isInFavorites(product.id)
@@ -288,7 +288,7 @@ const ProductPage: FC = () => {
 
 					{/* Доставка и оплата */}
 					<div className="mb-6 space-y-2">
-						<div className="flex items-center text-sm text-gray-600">
+						<div className="flex items-center text-sm text-[var(--text-secondary)]">
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
 								className="h-5 w-5 mr-2 text-green-500"
@@ -300,7 +300,7 @@ const ProductPage: FC = () => {
 							</svg>
 							Доставка от 1 до 3 дней
 						</div>
-						<div className="flex items-center text-sm text-gray-600">
+						<div className="flex items-center text-sm text-[var(--text-secondary)]">
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
 								className="h-5 w-5 mr-2 text-green-500"
@@ -316,7 +316,7 @@ const ProductPage: FC = () => {
 							</svg>
 							Оплата при получении
 						</div>
-						<div className="flex items-center text-sm text-gray-600">
+						<div className="flex items-center text-sm text-[var(--text-secondary)]">
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
 								className="h-5 w-5 mr-2 text-green-500"
@@ -336,13 +336,13 @@ const ProductPage: FC = () => {
 					{/* Описание товара */}
 					<div className="mb-6">
 						<h2 className="text-xl font-bold mb-2">Описание</h2>
-						<p className="text-gray-700">{product.description}</p>
+						<p className="text-[var(--text-primary)]">{product.description}</p>
 					</div>
 
 					{/* Характеристики товара */}
 					{product.features && product.features.length > 0 && (
 						<div className="mt-8">
-							<h2 className="text-xl font-bold mb-4 pb-2 border-b border-gray-200">
+							<h2 className="text-xl font-bold mb-4 pb-2 border-b border-[var(--border-color)]">
 								Характеристики
 							</h2>
 							<div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -363,7 +363,7 @@ const ProductPage: FC = () => {
 												/>
 											</svg>
 										</div>
-										<p className="ml-3 text-gray-700">{feature}</p>
+										<p className="ml-3 text-[var(--text-primary)]">{feature}</p>
 									</div>
 								))}
 							</div>

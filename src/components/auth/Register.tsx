@@ -72,19 +72,19 @@ const Register: FC = () => {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center px-4 py-12 bg-gray-50">
+        <div className="min-h-screen flex items-center justify-center px-4 py-12 bg-[var(--bg-secondary)]">
             <div className="form-container max-w-xl">
-                <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">Регистрация</h2>
+                <h2 className="text-2xl font-bold text-center text-[var(--text-secondary)] mb-6">Регистрация</h2>
                 
                 {error && (
-                    <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4" role="alert">
+                    <div className="bg-[var(--accent-color)] border border-[var(--border-color)] text-[var(--text-primary)] px-4 py-3 rounded mb-4" role="alert">
                         <span>{error}</span>
                     </div>
                 )}
                 
                 <form onSubmit={handleSubmit}>
                     <div className="mb-4">
-                        <label htmlFor="name" className="block text-gray-700 text-sm font-medium mb-2">
+                        <label htmlFor="name" className="block text-[var(--text-primary)] text-sm font-medium mb-2">
                             Имя <span className="text-red-500">*</span>
                         </label>
                         <input
@@ -99,7 +99,7 @@ const Register: FC = () => {
                     </div>
                     
                     <div className="mb-4">
-                        <label htmlFor="email" className="block text-gray-700 text-sm font-medium mb-2">
+                        <label htmlFor="email" className="block text-[var(--text-primary)] text-sm font-medium mb-2">
                             Email <span className="text-red-500">*</span>
                         </label>
                         <input
@@ -114,7 +114,7 @@ const Register: FC = () => {
                     </div>
                     
                     <div className="mb-4">
-                        <label htmlFor="password" className="block text-gray-700 text-sm font-medium mb-2">
+                        <label htmlFor="password" className="block text-[var(--text-primary)] text-sm font-medium mb-2">
                             Пароль <span className="text-red-500">*</span>
                         </label>
                         <input
@@ -129,7 +129,7 @@ const Register: FC = () => {
                     </div>
                     
                     <div className="mb-4">
-                        <label htmlFor="confirmPassword" className="block text-gray-700 text-sm font-medium mb-2">
+                        <label htmlFor="confirmPassword" className="block text-[var(--text-primary)] text-sm font-medium mb-2">
                             Подтверждение пароля <span className="text-red-500">*</span>
                         </label>
                         <input
@@ -144,7 +144,7 @@ const Register: FC = () => {
                     </div>
                     
                     <div className="mb-4">
-                        <label htmlFor="phone" className="block text-gray-700 text-sm font-medium mb-2">
+                        <label htmlFor="phone" className="block text-[var(--text-primary)] text-sm font-medium mb-2">
                             Телефон
                         </label>
                         <input
@@ -159,7 +159,7 @@ const Register: FC = () => {
                     </div>
                     
                     <div className="mb-6">
-                        <label htmlFor="address" className="block text-gray-700 text-sm font-medium mb-2">
+                        <label htmlFor="address" className="block text-[var(--text-primary)] text-sm font-medium mb-2">
                             Адрес
                         </label>
                         <input
@@ -183,9 +183,9 @@ const Register: FC = () => {
                 </form>
                 
                 <div className="mt-6 text-center">
-                    <p className="text-sm text-gray-600">
+                    <p className="text-sm text-[var(--text-secondary)]">
                         Уже есть аккаунт?{' '}
-                        <Link to="/login" className="text-orange-500 hover:text-orange-600 font-medium">
+                        <Link to="/login" className="text-[var(--accent-color)] hover:text-[var(--accent-hover)] font-medium">
                             Войти
                         </Link>
                     </p>

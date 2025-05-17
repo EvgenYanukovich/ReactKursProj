@@ -55,24 +55,24 @@ const ProfilePage: FC = () => {
     };
 
     return (
-        <div className="container mx-auto px-4 py-8">
+        <div className="container mx-auto px-4 py-8 bg-[var(--bg-body)]">
             <div className="flex flex-col md:flex-row gap-8">
                 <div className="md:w-1/4">
-                    <div className="bg-white p-6 rounded-lg shadow-md">
+                    <div className="bg-[var(--bg-primary)] p-6 rounded-lg shadow-md">
                         <div className="flex flex-col items-center mb-6">
-                            <div className="w-24 h-24 bg-orange-100 rounded-full flex justify-center items-center mb-4">
-                                <span className="text-orange-500 text-2xl font-bold">
+                            <div className="w-24 h-24 bg-[var(--accent-color)]/10 rounded-full flex justify-center items-center mb-4">
+                                <span className="text-[var(--accent-color)] text-2xl font-bold">
                                     {currentUser?.name?.charAt(0) || 'U'}
                                 </span>
                             </div>
                             <h2 className="text-xl font-semibold">{currentUser?.name}</h2>
-                            <p className="text-gray-500 text-sm">{currentUser?.email}</p>
+                            <p className="text-[var(--text-secondary)] text-sm">{currentUser?.email}</p>
                         </div>
                         
                         <nav>
                             <ul className="space-y-2">
                                 <li>
-                                    <Link to="/profile" className="flex items-center py-2 px-3 rounded-md bg-orange-50 text-orange-500">
+                                    <Link to="/profile" className="flex items-center py-2 px-3 rounded-md bg-[var(--accent-color)]/10 text-[var(--accent-color)]">
                                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-3" viewBox="0 0 20 20" fill="currentColor">
                                             <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
                                         </svg>
@@ -80,7 +80,7 @@ const ProfilePage: FC = () => {
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link to="/orders" className="flex items-center py-2 px-3 rounded-md text-gray-700 hover:bg-gray-50">
+                                    <Link to="/orders" className="flex items-center py-2 px-3 rounded-md text-[var(--text-primary)] hover:bg-[var(--bg-hover)]">
                                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-3" viewBox="0 0 20 20" fill="currentColor">
                                             <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z" />
                                             <path fillRule="evenodd" d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z" clipRule="evenodd" />
@@ -89,7 +89,7 @@ const ProfilePage: FC = () => {
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link to="/favorites" className="flex items-center py-2 px-3 rounded-md text-gray-700 hover:bg-gray-50">
+                                    <Link to="/favorites" className="flex items-center py-2 px-3 rounded-md text-[var(--text-primary)] hover:bg-[var(--bg-hover)]">
                                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-3" viewBox="0 0 20 20" fill="currentColor">
                                             <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
                                         </svg>
@@ -99,7 +99,7 @@ const ProfilePage: FC = () => {
                                 <li>
                                     <button 
                                         onClick={logout} 
-                                        className="w-full flex items-center py-2 px-3 rounded-md text-red-500 hover:bg-red-50"
+                                        className="w-full flex items-center py-2 px-3 rounded-md text-[var(--text-primary)] hover:bg-[var(--bg-hover)]"
                                     >
                                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-3" viewBox="0 0 20 20" fill="currentColor">
                                             <path fillRule="evenodd" d="M3 3a1 1 0 00-1 1v12a1 1 0 001 1h12a1 1 0 001-1V7.414l-5-5H3zm7 6a1 1 0 10-2 0v3.586l-1.293-1.293a1 1 0 10-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 12.586V9z" clipRule="evenodd" />
@@ -113,7 +113,7 @@ const ProfilePage: FC = () => {
                 </div>
                 
                 <div className="md:w-3/4">
-                    <div className="bg-white p-6 rounded-lg shadow-md">
+                    <div className="bg-[var(--bg-primary)] p-6 rounded-lg shadow-md">
                         <h2 className="text-xl font-semibold mb-6">Личные данные</h2>
                         
                         {showSuccess && (
@@ -126,7 +126,7 @@ const ProfilePage: FC = () => {
                             <div className="mb-8">
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     <div>
-                                        <label htmlFor="name" className="block text-gray-700 text-sm font-medium mb-2">
+                                        <label htmlFor="name" className="block text-[var(--text-primary)] text-sm font-medium mb-2">
                                             Имя
                                         </label>
                                         <input
@@ -140,7 +140,7 @@ const ProfilePage: FC = () => {
                                     </div>
                                     
                                     <div>
-                                        <label htmlFor="email" className="block text-gray-700 text-sm font-medium mb-2">
+                                        <label htmlFor="email" className="block text-[var(--text-primary)] text-sm font-medium mb-2">
                                             Email
                                         </label>
                                         <input
@@ -152,11 +152,11 @@ const ProfilePage: FC = () => {
                                             className="input-field"
                                             disabled
                                         />
-                                        <p className="text-sm text-gray-500 mt-1">Email нельзя изменить</p>
+                                        <p className="text-sm text-[var(--text-secondary)] mt-1">Email нельзя изменить</p>
                                     </div>
                                     
                                     <div>
-                                        <label htmlFor="phone" className="block text-gray-700 text-sm font-medium mb-2">
+                                        <label htmlFor="phone" className="block text-[var(--text-primary)] text-sm font-medium mb-2">
                                             Телефон
                                         </label>
                                         <input
@@ -176,7 +176,7 @@ const ProfilePage: FC = () => {
                             <div className="mb-8">
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     <div>
-                                        <label htmlFor="city" className="block text-gray-700 text-sm font-medium mb-2">
+                                        <label htmlFor="city" className="block text-[var(--text-primary)] text-sm font-medium mb-2">
                                             Город
                                         </label>
                                         <input
@@ -190,7 +190,7 @@ const ProfilePage: FC = () => {
                                     </div>
                                     
                                     <div>
-                                        <label htmlFor="postalCode" className="block text-gray-700 text-sm font-medium mb-2">
+                                        <label htmlFor="postalCode" className="block text-[var(--text-primary)] text-sm font-medium mb-2">
                                             Индекс
                                         </label>
                                         <input
@@ -204,7 +204,7 @@ const ProfilePage: FC = () => {
                                     </div>
                                     
                                     <div className="md:col-span-2">
-                                        <label htmlFor="address" className="block text-gray-700 text-sm font-medium mb-2">
+                                        <label htmlFor="address" className="block text-[var(--text-primary)] text-sm font-medium mb-2">
                                             Улица, дом, квартира
                                         </label>
                                         <input
@@ -224,7 +224,7 @@ const ProfilePage: FC = () => {
                             <div className="mb-8">
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     <div>
-                                        <label htmlFor="currentPassword" className="block text-gray-700 text-sm font-medium mb-2">
+                                        <label htmlFor="currentPassword" className="block text-[var(--text-primary)] text-sm font-medium mb-2">
                                             Текущий пароль
                                         </label>
                                         <input
@@ -238,7 +238,7 @@ const ProfilePage: FC = () => {
                                     </div>
                                     
                                     <div>
-                                        <label htmlFor="newPassword" className="block text-gray-700 text-sm font-medium mb-2">
+                                        <label htmlFor="newPassword" className="block text-[var(--text-primary)] text-sm font-medium mb-2">
                                             Новый пароль
                                         </label>
                                         <input
@@ -256,7 +256,7 @@ const ProfilePage: FC = () => {
                             <div className="flex justify-end">
                                 <button
                                     type="submit"
-                                    className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md"
+                                    className="bg-[var(--accent-color)] hover:bg-[var(--accent-hover)] text-white font-semibold py-2 px-4 rounded-md"
                                 >
                                     Сохранить изменения
                                 </button>

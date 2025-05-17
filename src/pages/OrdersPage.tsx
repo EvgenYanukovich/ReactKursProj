@@ -54,31 +54,31 @@ const OrdersPage: FC = () => {
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'pending':
-        return 'bg-yellow-100 text-yellow-800';
+        return 'bg-yellow-900/20 text-yellow-300';
       case 'processing':
-        return 'bg-blue-100 text-blue-800';
+        return 'bg-blue-900/20 text-blue-300';
       case 'shipped':
-        return 'bg-purple-100 text-purple-800';
+        return 'bg-purple-900/20 text-purple-300';
       case 'delivered':
-        return 'bg-green-100 text-green-800';
+        return 'bg-green-900/20 text-[var(--text-primary)]';
       case 'cancelled':
-        return 'bg-red-100 text-red-800';
+        return 'bg-red-900/20 text-red-300';
       default:
-        return 'bg-gray-100 text-gray-800';
+        return 'bg-[var(--bg-secondary)] text-[var(--text-primary)]';
     }
   };
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-8 bg-[var(--bg-body)]">
       <h1 className="text-3xl font-bold mb-4">История заказов</h1>
       
       {isLoading ? (
         <div className="flex justify-center items-center h-40">
-          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-orange-500"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[var(--accent-color)]"></div>
         </div>
       ) : orders.length === 0 ? (
-        <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100 text-center">
-          <p className="text-gray-600 mb-4">У вас пока нет заказов</p>
+        <div className="bg-[var(--bg-primary)] p-6 rounded-lg shadow-sm border border-[var(--border-color)] text-center">
+          <p className="text-[var(--text-secondary)] mb-4">У вас пока нет заказов</p>
           <Link to="/catalog" className="btn-primary inline-block">
             Перейти в каталог
           </Link>
@@ -86,7 +86,7 @@ const OrdersPage: FC = () => {
       ) : (
         <div className="space-y-4">
           {orders.map((order) => (
-            <div key={order.id} className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+            <div key={order.id} className="bg-[var(--bg-primary)] p-6 rounded-lg shadow-sm border border-[var(--border-color)]">
               <div className="flex flex-col md:flex-row justify-between mb-4">
                 <div>
                   <div className="flex items-center gap-3 mb-2">
@@ -95,7 +95,7 @@ const OrdersPage: FC = () => {
                       {getStatusText(order.status)}
                     </span>
                   </div>
-                  <p className="text-gray-600">
+                  <p className="text-[var(--text-secondary)]">
                     от {formatDate(order.createdAt)}
                   </p>
                 </div>
@@ -104,13 +104,13 @@ const OrdersPage: FC = () => {
                 </div>
               </div>
               
-              <div className="border-t border-gray-200 pt-4">
+              <div className="border-t border-[var(--border-color)] pt-4">
                 <h3 className="font-medium mb-2">Товары в заказе:</h3>
                 <div className="space-y-3">
                   {order.items.map((item) => (
                     <div key={item.product.id} className="flex items-center justify-between">
                       <div className="flex items-center">
-                        <div className="w-12 h-12 flex-shrink-0 bg-gray-100 rounded-md overflow-hidden">
+                        <div className="w-12 h-12 flex-shrink-0 bg-[var(--bg-secondary)] rounded-md overflow-hidden">
                           <img
                             src={item.product.imageUrl || "https://via.placeholder.com/100"}
                             alt={item.product.name}
@@ -118,13 +118,13 @@ const OrdersPage: FC = () => {
                           />
                         </div>
                         <div className="ml-3">
-                          <Link to={`/product/${item.product.id}`} className="text-sm font-medium text-gray-800 hover:text-orange-500">
+                          <Link to={`/product/${item.product.id}`} className="text-sm font-medium text-[var(--text-primary)] hover:text-[var(--accent-color)]">
                             {item.product.name}
                           </Link>
-                          <p className="text-xs text-gray-500">{item.quantity} шт. × {item.product.price} ₽</p>
+                          <p className="text-xs text-[var(--text-secondary)]">{item.quantity} шт. × {item.product.price} ₽</p>
                         </div>
                       </div>
-                      <span className="font-medium text-gray-800">
+                      <span className="font-medium text-[var(--text-primary)]">
                         {item.product.price * item.quantity} ₽
                       </span>
                     </div>
@@ -132,11 +132,11 @@ const OrdersPage: FC = () => {
                 </div>
               </div>
               
-              <div className="border-t border-gray-200 pt-4 mt-4">
+              <div className="border-t border-[var(--border-color)] pt-4 mt-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <h3 className="font-medium mb-2">Адрес доставки:</h3>
-                    <p className="text-gray-600">
+                    <p className="text-[var(--text-secondary)]">
                       {order.shippingAddress.fullName}<br />
                       {order.shippingAddress.address}<br />
                       {order.shippingAddress.city}, {order.shippingAddress.postalCode}<br />
@@ -145,7 +145,7 @@ const OrdersPage: FC = () => {
                   </div>
                   <div>
                     <h3 className="font-medium mb-2">Информация о доставке:</h3>
-                    <p className="text-gray-600">
+                    <p className="text-[var(--text-secondary)]">
                       Способ доставки: {order.deliveryMethod === 'courier' ? 'Курьер' : 
                                         order.deliveryMethod === 'pickup' ? 'Почта России' : 
                                         'Самовывоз'}
@@ -166,7 +166,7 @@ const OrdersPage: FC = () => {
               </div>
               
               <div className="mt-4">
-                <Link to={`/order-success/${order.id}`} className="text-orange-500 hover:text-orange-600 font-medium">
+                <Link to={`/order-success/${order.id}`} className="text-[var(--accent-color)] hover:text-[var(--accent-hover)] font-medium">
                   Подробнее о заказе
                 </Link>
               </div>

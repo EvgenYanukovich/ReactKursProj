@@ -147,35 +147,35 @@ const DeliveryDatePicker: FC<DeliveryDatePickerProps> = ({ onDateSelect, selecte
   const weekdays = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+    <div className="bg-[var(--bg-primary)] p-6 rounded-lg shadow-sm border border-gray-100">
       <h2 className="text-xl font-bold mb-4">Дата доставки</h2>
       
       {/* Если выбран самовывоз, не показываем календарь */}
       {selectedDeliveryMethod === "selfPickup" ? (
-        <p className="text-gray-600">При самовывозе вы можете забрать заказ в любое удобное время в часы работы магазина.</p>
+        <p className="text-[var(--text-secondary)]">При самовывозе вы можете забрать заказ в любое удобное время в часы работы магазина.</p>
       ) : (
         <>
           <div className="mb-4">
-            <p className="text-sm text-gray-600 mb-2">Выберите дату*</p>
+            <p className="text-sm text-[var(--text-secondary)] mb-2">Выберите дату*</p>
             
             {/* Календарь */}
-            <div className="border border-gray-200 rounded-md">
+            <div className="border border-[var(--border-color)] rounded-md">
               {/* Заголовок календаря */}
-              <div className="flex justify-between items-center p-3 border-b border-gray-200">
+              <div className="flex justify-between items-center p-3 border-b border-[var(--border-color)]">
                 <button 
                   onClick={goToPreviousMonth}
-                  className="text-gray-600 hover:text-orange-500 focus:outline-none"
+                  className="text-[var(--text-secondary)] hover:text-[var(--accent-color)] focus:outline-none"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                     <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
                   </svg>
                 </button>
-                <h3 className="text-lg font-medium text-gray-800 capitalize">
+                <h3 className="text-lg font-medium text-[var(--text-primary)] capitalize">
                   {formatMonth(currentMonth)}
                 </h3>
                 <button 
                   onClick={goToNextMonth}
-                  className="text-gray-600 hover:text-orange-500 focus:outline-none"
+                  className="text-[var(--text-secondary)] hover:text-[var(--accent-color)] focus:outline-none"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                     <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
@@ -184,9 +184,9 @@ const DeliveryDatePicker: FC<DeliveryDatePickerProps> = ({ onDateSelect, selecte
               </div>
               
               {/* Дни недели */}
-              <div className="grid grid-cols-7 text-center py-2 border-b border-gray-200">
+              <div className="grid grid-cols-7 text-center py-2 border-b border-[var(--border-color)]">
                 {weekdays.map((day, index) => (
-                  <div key={index} className="text-sm font-medium text-gray-600">
+                  <div key={index} className="text-sm font-medium text-[var(--text-secondary)]">
                     {day}
                   </div>
                 ))}
@@ -203,10 +203,10 @@ const DeliveryDatePicker: FC<DeliveryDatePickerProps> = ({ onDateSelect, selecte
                         disabled={isPastDate(date)}
                         className={`
                           py-3 text-center text-sm
-                          ${isCurrentMonth(date) ? 'text-gray-800' : 'text-gray-400'}
-                          ${isPastDate(date) ? 'opacity-50 cursor-not-allowed' : 'hover:bg-gray-100'}
-                          ${isDateSelected(date) ? 'bg-orange-100 text-orange-600 font-medium' : ''}
-                          ${isToday(date) && !isDateSelected(date) ? 'border border-orange-500' : ''}
+                          ${isCurrentMonth(date) ? 'text-[var(--text-primary)]' : 'text-[var(--text-secondary)]'}
+                          ${isPastDate(date) ? 'opacity-50 cursor-not-allowed' : 'hover:bg-[var(--bg-hover)]'}
+                          ${isDateSelected(date) ? 'bg-[var(--accent-color)]/10 text-[var(--accent-color)] font-medium' : ''}
+                          ${isToday(date) && !isDateSelected(date) ? 'border border-[var(--accent-color)]' : ''}
                         `}
                       >
                         {date.getDate()}
@@ -220,11 +220,11 @@ const DeliveryDatePicker: FC<DeliveryDatePickerProps> = ({ onDateSelect, selecte
           
           {/* Выбор времени */}
           <div>
-            <p className="text-sm text-gray-600 mb-2">Выберите время*</p>
+            <p className="text-sm text-[var(--text-secondary)] mb-2">Выберите время*</p>
             <select
               value={selectedTime}
               onChange={(e) => handleTimeSelect(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+              className="w-full px-4 py-2 border border-[var(--border-color)] rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
             >
               {timeSlots.map((time) => (
                 <option key={time} value={time}>

@@ -80,14 +80,14 @@ const Breadcrumbs: FC = () => {
 	}
 
 	return (
-		<nav className="bg-gray-50">
+		<nav className="bg-[var(--bg-secondary)]">
 			<div className="container py-3 px-4 mx-auto">
-				<ol className="flex flex-wrap items-center text-sm text-gray-600">
+				<ol className="flex flex-wrap items-center text-sm text-[var(--text-secondary)]">
 					{breadcrumbs.map((breadcrumb, index) => (
 						<li key={breadcrumb.path} className="flex items-center">
 							{index > 0 && (
 								<svg
-									className="mx-2 text-gray-400"
+									className="mx-2 text-[var(--text-secondary)]"
 									width="16"
 									height="16"
 									viewBox="0 0 24 24"
@@ -102,11 +102,11 @@ const Breadcrumbs: FC = () => {
 							)}
 
 							{index === breadcrumbs.length - 1 ? (
-								<span className="font-medium text-gray-800">{breadcrumb.name}</span>
+								<span className="font-medium text-[var(--text-primary)]">{breadcrumb.name}</span>
 							) : (
 								<Link
 									to={breadcrumb.path}
-									className="hover:text-orange-500 font-medium"
+									className="hover:text-[var(--accent-color)] font-medium"
 								>
 									{breadcrumb.name}
 								</Link>

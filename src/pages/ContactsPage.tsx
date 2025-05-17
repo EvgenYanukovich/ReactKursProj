@@ -39,20 +39,20 @@ const ContactsPage: FC = () => {
 	};
 
 	return (
-		<div className="container mx-auto px-4 py-8">
+		<div className="container mx-auto px-4 py-8 bg-[var(--bg-body)]">
 			<h1 className="text-3xl font-bold mb-8">Контакты</h1>
 
 			<div className="grid grid-cols-1 md:grid-cols-2 gap-8">
 				{/* Контактная информация */}
 				<div>
-					<div className="bg-white rounded-lg shadow-md p-6">
+					<div className="bg-[var(--bg-primary)] rounded-lg shadow p-6">
 						<h2 className="text-xl font-semibold mb-6">Наши контакты</h2>
 
 						<div className="space-y-4">
 							<div className="flex items-start">
-								<div className="bg-orange-100 p-3 rounded-full mr-4">
+								<div className="bg-[var(--accent-color)]/10 p-3 rounded-full mr-4">
 									<svg
-										className="h-6 w-6 text-orange-500"
+										className="h-6 w-6 text-[var(--accent-color)]"
 										fill="none"
 										viewBox="0 0 24 24"
 										stroke="currentColor"
@@ -72,15 +72,15 @@ const ContactsPage: FC = () => {
 									</svg>
 								</div>
 								<div>
-									<h3 className="font-medium text-gray-800">Адрес</h3>
-									<p className="text-gray-600">ул. Пушкина 123, Москва, Россия</p>
+									<h3 className="font-medium text-[var(--text-primary)]">Адрес</h3>
+									<p className="text-[var(--text-secondary)]">ул. Пушкина 123, Москва, Россия</p>
 								</div>
 							</div>
 
 							<div className="flex items-start">
-								<div className="bg-orange-100 p-3 rounded-full mr-4">
+								<div className="bg-[var(--accent-color)]/10 p-3 rounded-full mr-4">
 									<svg
-										className="h-6 w-6 text-orange-500"
+										className="h-6 w-6 text-[var(--accent-color)]"
 										fill="none"
 										viewBox="0 0 24 24"
 										stroke="currentColor"
@@ -94,15 +94,15 @@ const ContactsPage: FC = () => {
 									</svg>
 								</div>
 								<div>
-									<h3 className="font-medium text-gray-800">Телефон</h3>
-									<p className="text-gray-600">+7 (999) 123-45-67</p>
+									<h3 className="font-medium text-[var(--text-primary)]">Телефон</h3>
+									<p className="text-[var(--text-secondary)]">+7 (999) 123-45-67</p>
 								</div>
 							</div>
 
 							<div className="flex items-start">
-								<div className="bg-orange-100 p-3 rounded-full mr-4">
+								<div className="bg-[var(--accent-color)]/10 p-3 rounded-full mr-4">
 									<svg
-										className="h-6 w-6 text-orange-500"
+										className="h-6 w-6 text-[var(--accent-color)]"
 										fill="none"
 										viewBox="0 0 24 24"
 										stroke="currentColor"
@@ -116,15 +116,15 @@ const ContactsPage: FC = () => {
 									</svg>
 								</div>
 								<div>
-									<h3 className="font-medium text-gray-800">Email</h3>
-									<p className="text-gray-600">info@petsandclaws.ru</p>
+									<h3 className="font-medium text-[var(--text-primary)]">Email</h3>
+									<p className="text-[var(--text-secondary)]">info@petsandclaws.ru</p>
 								</div>
 							</div>
 
 							<div className="flex items-start">
-								<div className="bg-orange-100 p-3 rounded-full mr-4">
+								<div className="bg-[var(--accent-color)]/10 p-3 rounded-full mr-4">
 									<svg
-										className="h-6 w-6 text-orange-500"
+										className="h-6 w-6 text-[var(--accent-color)]"
 										fill="none"
 										viewBox="0 0 24 24"
 										stroke="currentColor"
@@ -138,21 +138,21 @@ const ContactsPage: FC = () => {
 									</svg>
 								</div>
 								<div>
-									<h3 className="font-medium text-gray-800">Время работы</h3>
-									<p className="text-gray-600">Пн-Пт: 9:00 - 21:00</p>
-									<p className="text-gray-600">Сб-Вс: 10:00 - 18:00</p>
+									<h3 className="font-medium text-[var(--text-primary)]">Время работы</h3>
+									<p className="text-[var(--text-secondary)]">Пн-Пт: 9:00 - 21:00</p>
+									<p className="text-[var(--text-secondary)]">Сб-Вс: 10:00 - 18:00</p>
 								</div>
 							</div>
 						</div>
 
 						<div className="mt-8">
-							<h3 className="font-medium text-gray-800 mb-4">
+							<h3 className="font-medium text-[var(--text-primary)] mb-4">
 								Мы в социальных сетях
 							</h3>
 							<div className="flex space-x-4">
 								<a
 									href="#"
-									className="bg-gray-100 p-2 rounded-full text-gray-600 hover:bg-orange-100 hover:text-orange-500"
+									className="bg-gray-100 p-2 rounded-full text-[var(--text-secondary)] hover:bg-[var(--accent-color)]/10 hover:text-[var(--accent-color)]"
 								>
 									<svg
 										className="h-6 w-6"
@@ -164,7 +164,7 @@ const ContactsPage: FC = () => {
 								</a>
 								<a
 									href="#"
-									className="bg-gray-100 p-2 rounded-full text-gray-600 hover:bg-orange-100 hover:text-orange-500"
+									className="bg-gray-100 p-2 rounded-full text-[var(--text-secondary)] hover:bg-[var(--accent-color)]/10 hover:text-[var(--accent-color)]"
 								>
 									<svg
 										className="h-6 w-6"
@@ -176,7 +176,7 @@ const ContactsPage: FC = () => {
 								</a>
 								<a
 									href="#"
-									className="bg-gray-100 p-2 rounded-full text-gray-600 hover:bg-orange-100 hover:text-orange-500"
+									className="bg-gray-100 p-2 rounded-full text-[var(--text-secondary)] hover:bg-[var(--accent-color)]/10 hover:text-[var(--accent-color)]"
 								>
 									<svg
 										className="h-6 w-6"
@@ -190,31 +190,31 @@ const ContactsPage: FC = () => {
 						</div>
 					</div>
 
-					<div className="mt-8 bg-white rounded-lg shadow-md p-6">
+					<div className="mt-8 bg-[var(--bg-primary)] rounded-lg shadow p-6">
 						<h2 className="text-xl font-semibold mb-6">Часто задаваемые вопросы</h2>
 
 						<div className="space-y-4">
 							<div>
-								<h3 className="font-medium text-gray-800">Как оформить заказ?</h3>
-								<p className="text-gray-600">
+								<h3 className="font-medium text-[var(--text-primary)]">Как оформить заказ?</h3>
+								<p className="text-[var(--text-secondary)]">
 									Добавьте товары в корзину, перейдите к оформлению и следуйте
 									инструкциям.
 								</p>
 							</div>
 
 							<div>
-								<h3 className="font-medium text-gray-800">
+								<h3 className="font-medium text-[var(--text-primary)]">
 									Какие способы оплаты доступны?
 								</h3>
-								<p className="text-gray-600">
+								<p className="text-[var(--text-secondary)]">
 									Мы принимаем оплату картой, наличными при получении и
 									электронными платежами.
 								</p>
 							</div>
 
 							<div>
-								<h3 className="font-medium text-gray-800">Сроки доставки?</h3>
-								<p className="text-gray-600">
+								<h3 className="font-medium text-[var(--text-primary)]">Сроки доставки?</h3>
+								<p className="text-[var(--text-secondary)]">
 									Доставка по Москве осуществляется в течение 1-2 дней, по России
 									3-7 дней.
 								</p>
@@ -224,12 +224,12 @@ const ContactsPage: FC = () => {
 				</div>
 
 				{/* Форма обратной связи */}
-				<div className="bg-white rounded-lg shadow-md p-6">
+				<div className="bg-[var(--bg-primary)] rounded-lg shadow p-6">
 					<h2 className="text-xl font-semibold mb-6">Связаться с нами</h2>
 
 					{formSubmitted ? (
 						<div
-							className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4"
+							className="bg-green-900/20 border border-green-600 text-green-300 px-4 py-3 rounded mb-4"
 							role="alert"
 						>
 							<strong className="font-bold">Спасибо за обращение!</strong>
@@ -240,7 +240,7 @@ const ContactsPage: FC = () => {
 							<div className="mb-4">
 								<label
 									htmlFor="name"
-									className="block text-gray-700 text-sm font-medium mb-2"
+									className="block text-[var(--text-primary)] text-sm font-medium mb-2"
 								>
 									Ваше имя <span className="text-red-500">*</span>
 								</label>
@@ -259,7 +259,7 @@ const ContactsPage: FC = () => {
 							<div className="mb-4">
 								<label
 									htmlFor="email"
-									className="block text-gray-700 text-sm font-medium mb-2"
+									className="block text-[var(--text-primary)] text-sm font-medium mb-2"
 								>
 									Email <span className="text-red-500">*</span>
 								</label>
@@ -278,7 +278,7 @@ const ContactsPage: FC = () => {
 							<div className="mb-4">
 								<label
 									htmlFor="subject"
-									className="block text-gray-700 text-sm font-medium mb-2"
+									className="block text-[var(--text-primary)] text-sm font-medium mb-2"
 								>
 									Тема
 								</label>
@@ -296,7 +296,7 @@ const ContactsPage: FC = () => {
 							<div className="mb-6">
 								<label
 									htmlFor="message"
-									className="block text-gray-700 text-sm font-medium mb-2"
+									className="block text-[var(--text-primary)] text-sm font-medium mb-2"
 								>
 									Сообщение <span className="text-red-500">*</span>
 								</label>

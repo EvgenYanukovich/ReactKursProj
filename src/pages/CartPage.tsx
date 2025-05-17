@@ -41,8 +41,8 @@ const CartPage: FC = () => {
 			description: "Универсальная",
 			price: 750,
 			oldPrice: null,
-			imageUrl: "/images/products/brush.jpg",
-			thumbnailUrl: "/images/products/brush.jpg",
+			imageUrl: "/images/products/brush.png",
+			thumbnailUrl: "/images/products/brush.png",
 			category: "Аксессуары",
 			petType: "Кошки и собаки",
 			rating: 4.5,
@@ -58,8 +58,8 @@ const CartPage: FC = () => {
 			description: "Премиум, 1 кг",
 			price: 850,
 			oldPrice: 950,
-			imageUrl: "/images/products/cat-food-salmon.jpg",
-			thumbnailUrl: "/images/products/cat-food-salmon.jpg",
+			imageUrl: "/images/products/cat-food-salmon.png",
+			thumbnailUrl: "/images/products/cat-food-salmon.png",
 			category: "Корма",
 			petType: "Кошки",
 			rating: 4.8,
@@ -75,8 +75,8 @@ const CartPage: FC = () => {
 			description: "Нержавеющая сталь, 0.5л",
 			price: 520,
 			oldPrice: null,
-			imageUrl: "/images/products/dog-bowl.jpg",
-			thumbnailUrl: "/images/products/dog-bowl.jpg",
+			imageUrl: "/images/products/dog-bowl.png",
+			thumbnailUrl: "/images/products/dog-bowl.png",
 			category: "Аксессуары",
 			petType: "Собаки",
 			rating: 4.2,
@@ -92,8 +92,8 @@ const CartPage: FC = () => {
 			description: "Для чувствительной кожи, 250мл",
 			price: 480,
 			oldPrice: null,
-			imageUrl: "/images/products/pet-shampoo.jpg",
-			thumbnailUrl: "/images/products/pet-shampoo.jpg",
+			imageUrl: "/images/products/pet-shampoo.png",
+			thumbnailUrl: "/images/products/pet-shampoo.png",
 			category: "Уход",
 			petType: "Кошки и собаки",
 			rating: 4.6,
@@ -106,8 +106,8 @@ const CartPage: FC = () => {
 	];
 
 	return (
-		<div className="container mx-auto px-4 py-8">
-			<h1 className="text-3xl font-bold mb-8">Корзина</h1>
+		<div className="container mx-auto px-4 py-8 bg-[var(--bg-body)]">
+			<h1 className="text-3xl font-bold mb-8 text-[var(--text-primary)]">Корзина</h1>
 
 			<div className="flex flex-col lg:flex-row gap-8">
 				{/* Список товаров в корзине */}
@@ -117,7 +117,7 @@ const CartPage: FC = () => {
 							{cartItems.map((item) => (
 								<div
 									key={item.product.id}
-									className="bg-white p-4 rounded-lg shadow-sm border border-gray-100"
+									className="bg-[var(--bg-primary)] p-4 rounded-lg shadow-sm border border-[var(--border-color)]"
 								>
 									<div className="flex items-center">
 										<div className="w-24 h-24 flex-shrink-0 bg-gray-100 rounded-md overflow-hidden">
@@ -132,10 +132,10 @@ const CartPage: FC = () => {
 										</div>
 
 										<div className="ml-4 flex-grow">
-											<h3 className="font-medium text-gray-800">
+											<h3 className="font-medium text-[var(--text-primary)]">
 												{item.product.name}
 											</h3>
-											<p className="text-sm text-gray-500">
+											<p className="text-sm text-[var(--text-secondary)]">
 												{item.product.description ||
 													`Для ${item.product.petType.toLowerCase()}`}
 											</p>
@@ -149,7 +149,7 @@ const CartPage: FC = () => {
 																item.quantity - 1
 															)
 														}
-														className="w-8 h-8 flex items-center justify-center border border-gray-300 rounded-md text-gray-600 hover:bg-gray-100"
+														className="w-8 h-8 flex items-center justify-center border border-gray-300 rounded-md text-[var(--text-secondary)] hover:bg-gray-100"
 													>
 														-
 													</button>
@@ -163,21 +163,21 @@ const CartPage: FC = () => {
 																item.quantity + 1
 															)
 														}
-														className="w-8 h-8 flex items-center justify-center border border-gray-300 rounded-md text-gray-600 hover:bg-gray-100"
+														className="w-8 h-8 flex items-center justify-center border border-gray-300 rounded-md text-[var(--text-secondary)] hover:bg-gray-100"
 													>
 														+
 													</button>
 												</div>
 
 												<div className="flex items-center">
-													<span className="font-medium text-gray-800 mr-4">
+													<span className="font-medium text-[var(--text-primary)] mr-4">
 														{item.product.price * item.quantity} ₽
 													</span>
 													<button
 														onClick={() =>
 															handleRemoveItem(item.product.id)
 														}
-														className="text-gray-400 hover:text-gray-600"
+														className="text-gray-400 hover:text-[var(--text-secondary)]"
 													>
 														<svg
 															xmlns="http://www.w3.org/2000/svg"
@@ -200,20 +200,20 @@ const CartPage: FC = () => {
 							))}
 
 							{/* Промокод */}
-							<div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100 mt-6">
-								<h3 className="font-medium text-gray-800 mb-2">Промокод</h3>
+							<div className="bg-[var(--bg-primary)] p-4 rounded-lg shadow-sm border border-[var(--border-color)] mt-6">
+								<h3 className="font-medium text-[var(--text-primary)] mb-2">Промокод</h3>
 								<div className="flex">
 									<input
 										type="text"
 										value={promoCode}
 										onChange={(e) => setPromoCode(e.target.value)}
 										placeholder="Введите промокод"
-										className="flex-grow px-4 py-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+										className="flex-grow px-4 py-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-[var(--accent-color)] focus:border-transparent"
 										disabled={promoApplied}
 									/>
 									<button
 										onClick={handlePromoCode}
-										className="px-4 py-2 bg-orange-500 text-white rounded-r-md hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
+										className="px-4 py-2 bg-[var(--accent-color)] text-white rounded-r-md hover:bg-[var(--accent-hover)] focus:outline-none focus:ring-2 focus:ring-[var(--accent-color)] focus:ring-offset-2"
 										disabled={promoApplied}
 									>
 										Применить
@@ -227,16 +227,16 @@ const CartPage: FC = () => {
 							</div>
 						</div>
 					) : (
-						<div className="bg-white p-8 rounded-lg shadow-sm border border-gray-100 text-center">
-							<h3 className="text-xl font-medium text-gray-800 mb-2">
+						<div className="bg-[var(--bg-primary)] p-8 rounded-lg shadow-sm border border-[var(--border-color)] text-center">
+							<h3 className="text-xl font-medium text-[var(--text-primary)] mb-2">
 								Ваша корзина пуста
 							</h3>
-							<p className="text-gray-600 mb-6">
+							<p className="text-[var(--text-secondary)] mb-6">
 								Добавьте товары из каталога, чтобы оформить заказ
 							</p>
 							<Link
 								to="/catalog"
-								className="inline-block px-6 py-3 bg-orange-500 text-white rounded-md hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
+								className="inline-block px-6 py-3 bg-[var(--accent-color)] text-white rounded-md hover:bg-[var(--accent-hover)] focus:outline-none focus:ring-2 focus:ring-[var(--accent-color)] focus:ring-offset-2"
 							>
 								Перейти в каталог
 							</Link>
@@ -247,12 +247,12 @@ const CartPage: FC = () => {
 				{/* Сумма заказа */}
 				{cartItems.length > 0 && (
 					<div className="lg:w-1/3">
-						<div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100 sticky top-4">
+						<div className="bg-[var(--bg-primary)] p-6 rounded-lg shadow-sm border border-[var(--border-color)] sticky top-4">
 							<h2 className="text-xl font-bold mb-4">Сумма заказа</h2>
 
 							<div className="space-y-2 mb-4">
 								<div className="flex justify-between">
-									<span className="text-gray-600">
+									<span className="text-[var(--text-secondary)]">
 										Товары ({cartItems.length})
 									</span>
 									<span className="font-medium">{totalPrice} ₽</span>
@@ -266,14 +266,14 @@ const CartPage: FC = () => {
 								)}
 
 								<div className="flex justify-between">
-									<span className="text-gray-600">Доставка</span>
+									<span className="text-[var(--text-secondary)]">Доставка</span>
 									<span>
 										{deliveryFee > 0 ? `${deliveryFee} ₽` : "Бесплатно"}
 									</span>
 								</div>
 							</div>
 
-							<div className="border-t border-gray-200 pt-4 mb-6">
+							<div className="border-t border-[var(--border-color)] pt-4 mb-6">
 								<div className="flex justify-between items-center">
 									<span className="font-bold text-lg">Итого</span>
 									<span className="font-bold text-lg">{finalTotal} ₽</span>
@@ -282,12 +282,12 @@ const CartPage: FC = () => {
 
 							<Link
 								to="/checkout"
-								className="block w-full py-3 bg-orange-500 text-white rounded-md hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 font-medium text-center"
+								className="block w-full py-3 bg-[var(--accent-color)] text-white rounded-md hover:bg-[var(--accent-hover)] focus:outline-none focus:ring-2 focus:ring-[var(--accent-color)] focus:ring-offset-2 font-medium text-center"
 							>
 								Оформить заказ
 							</Link>
 
-							<div className="mt-4 flex justify-center items-center text-gray-500 text-sm">
+							<div className="mt-4 flex justify-center items-center text-[var(--text-secondary)] text-sm">
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
 									className="h-5 w-5 mr-1"
